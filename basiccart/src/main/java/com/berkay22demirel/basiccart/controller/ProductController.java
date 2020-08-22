@@ -1,5 +1,7 @@
 package com.berkay22demirel.basiccart.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -16,8 +18,16 @@ public class ProductController {
 		productService.addProduct(product);
 	}
 
-	public void deleteProduct(Product product) {
+	public void updateProduct(Product product) {
+		productService.updateProduct(product);
+	}
 
+	public void deleteProduct(Product product) {
+		productService.deleteProduct(product);
+	}
+
+	public List<Product> getAllProduct() {
+		return productService.getAllProducts();
 	}
 
 }
