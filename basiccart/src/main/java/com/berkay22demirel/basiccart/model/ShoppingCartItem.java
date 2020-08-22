@@ -1,5 +1,10 @@
 package com.berkay22demirel.basiccart.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ShoppingCartItem extends BaseModel {
 
 	private Product product;

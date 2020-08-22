@@ -2,6 +2,11 @@ package com.berkay22demirel.basiccart.model;
 
 import com.berkay22demirel.basiccart.constant.DiscountType;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Campaign extends BaseModel {
 
 	private Category category;

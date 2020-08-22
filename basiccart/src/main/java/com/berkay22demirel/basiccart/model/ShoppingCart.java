@@ -3,6 +3,11 @@ package com.berkay22demirel.basiccart.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ShoppingCart extends BaseModel {
 
 	private List<ShoppingCartItem> shoppingCartItems;
