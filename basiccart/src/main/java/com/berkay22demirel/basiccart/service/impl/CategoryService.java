@@ -1,4 +1,4 @@
-package com.berkay22demirel.basiccart.service;
+package com.berkay22demirel.basiccart.service.impl;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.berkay22demirel.basiccart.dao.ICategoryDao;
 import com.berkay22demirel.basiccart.entity.Category;
+import com.berkay22demirel.basiccart.service.ICategoryService;
 
 public class CategoryService implements ICategoryService {
 

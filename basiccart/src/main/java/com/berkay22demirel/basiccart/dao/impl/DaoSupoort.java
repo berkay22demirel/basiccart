@@ -1,9 +1,11 @@
-package com.berkay22demirel.basiccart.dao;
+package com.berkay22demirel.basiccart.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.berkay22demirel.basiccart.dao.Database;
+import com.berkay22demirel.basiccart.dao.IDao;
 import com.berkay22demirel.basiccart.entity.BaseEntity;
 
 public abstract class DaoSupoort<T> implements IDao<T> {

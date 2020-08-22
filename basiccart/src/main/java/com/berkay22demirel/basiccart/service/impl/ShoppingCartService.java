@@ -1,4 +1,4 @@
-package com.berkay22demirel.basiccart.service;
+package com.berkay22demirel.basiccart.service.impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.berkay22demirel.basiccart.dao.IShoppingCartDao;
 import com.berkay22demirel.basiccart.entity.ShoppingCart;
+import com.berkay22demirel.basiccart.service.IShoppingCartService;
 
 @Service
 public class ShoppingCartService implements IShoppingCartService {
