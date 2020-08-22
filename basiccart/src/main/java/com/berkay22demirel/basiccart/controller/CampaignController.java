@@ -26,7 +26,7 @@ public class CampaignController {
 		campaignService.deleteCampaign(campaign);
 	}
 
-	public List<Campaign> getAllCampaign() {
+	public List<Campaign> getAllCampaigns() {
 		return campaignService.getAllCampaigns();
 	}
 
