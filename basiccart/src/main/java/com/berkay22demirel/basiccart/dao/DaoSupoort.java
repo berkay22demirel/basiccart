@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.berkay22demirel.basiccart.model.BaseModel;
+import com.berkay22demirel.basiccart.entity.BaseEntity;
 
 public abstract class DaoSupoort<T> implements IDao<T> {
 
@@ -20,14 +20,14 @@ public abstract class DaoSupoort<T> implements IDao<T> {
 	@Override
 	public void update(T object) {
 		Map<Long, T> table = Database.getTable(typeParameterClass);
-		Long id = ((BaseModel) object).getId();
+		Long id = ((BaseEntity) object).getId();
 		table.replace(id, object);
 	}
 
 	@Override
 	public void delete(T object) {
 		Map<Long, T> table = Database.getTable(typeParameterClass);
-		Long id = ((BaseModel) object).getId();
+		Long id = ((BaseEntity) object).getId();
 		table.remove(id);
 	}
 

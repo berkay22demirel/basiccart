@@ -1,4 +1,4 @@
-package com.berkay22demirel.basiccart.model;
+package com.berkay22demirel.basiccart.entity;
 
 import com.berkay22demirel.basiccart.constant.DiscountType;
 
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Coupon extends BaseModel {
+public class Coupon extends BaseEntity {
 
 	private double minimumAmount;
 	private double discount;

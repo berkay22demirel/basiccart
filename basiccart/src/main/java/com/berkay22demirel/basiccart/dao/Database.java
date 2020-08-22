@@ -3,12 +3,12 @@ package com.berkay22demirel.basiccart.dao;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.berkay22demirel.basiccart.model.Campaign;
-import com.berkay22demirel.basiccart.model.Category;
-import com.berkay22demirel.basiccart.model.Coupon;
-import com.berkay22demirel.basiccart.model.Product;
-import com.berkay22demirel.basiccart.model.ShoppingCart;
-import com.berkay22demirel.basiccart.model.ShoppingCartItem;
+import com.berkay22demirel.basiccart.entity.Campaign;
+import com.berkay22demirel.basiccart.entity.Category;
+import com.berkay22demirel.basiccart.entity.Coupon;
+import com.berkay22demirel.basiccart.entity.Product;
+import com.berkay22demirel.basiccart.entity.ShoppingCart;
+import com.berkay22demirel.basiccart.entity.ShoppingCartItem;
 
 public class Database {
 

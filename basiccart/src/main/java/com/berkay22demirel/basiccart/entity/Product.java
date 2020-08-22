@@ -1,11 +1,11 @@
-package com.berkay22demirel.basiccart.model;
+package com.berkay22demirel.basiccart.entity;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Product extends BaseModel {
+public class Product extends BaseEntity {
 
 	private String name;
 	private double price;

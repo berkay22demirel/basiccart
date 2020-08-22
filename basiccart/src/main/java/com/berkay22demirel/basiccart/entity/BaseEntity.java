@@ -1,11 +1,11 @@
-package com.berkay22demirel.basiccart.model;
+package com.berkay22demirel.basiccart.entity;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class BaseModel {
+public class BaseEntity {
 
 	private long id;
 

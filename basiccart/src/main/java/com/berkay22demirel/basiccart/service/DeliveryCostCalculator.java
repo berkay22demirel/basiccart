@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.berkay22demirel.basiccart.model.ShoppingCart;
-import com.berkay22demirel.basiccart.model.ShoppingCartItem;
+import com.berkay22demirel.basiccart.entity.ShoppingCart;
+import com.berkay22demirel.basiccart.entity.ShoppingCartItem;
 
 @Service
 public class DeliveryCostCalculator implements IDeliveryCostCalculator {
