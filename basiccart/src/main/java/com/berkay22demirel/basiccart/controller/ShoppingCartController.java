@@ -15,12 +15,12 @@ import com.berkay22demirel.basiccart.entity.Campaign;
 import com.berkay22demirel.basiccart.entity.Coupon;
 import com.berkay22demirel.basiccart.entity.Product;
 import com.berkay22demirel.basiccart.entity.ShoppingCart;
-import com.berkay22demirel.basiccart.entity.ShoppingCartItem;
 import com.berkay22demirel.basiccart.service.IDeliveryCostCalculator;
 import com.berkay22demirel.basiccart.service.IShoppingCartService;
 import com.berkay22demirel.basiccart.util.ConsoleUtil;
 
-@RestController(value = "/shoppingcart")
+@RestController
+@RequestMapping(value = "/shoppingcart")
 public class ShoppingCartController {
 
 	@Autowired
@@ -32,16 +32,7 @@ public class ShoppingCartController {
 
 	@RequestMapping(value = "/add/{quantity}", method = RequestMethod.POST)
 	public ResponseEntity<Object> addItem(@RequestBody Product product, @PathVariable("quantity") int quantity) {
-		ShoppingCartItem matchingItem = shoppingCartService.findMatchingItem(shoppingCart.getShoppingCartItems(),
-				product);
-		if (matchingItem == null) {
-			ShoppingCartItem shoppingCartItem = new ShoppingCartItem(product, quantity);
-			shoppingCart.getShoppingCartItems().add(shoppingCartItem);
-		} else {
-			matchingItem.setQuantity(matchingItem.getQuantity() + quantity);
-		}
-		double addedProductAmount = product.getPrice() * quantity;
-		shoppingCart.setTotalAmount(shoppingCart.getTotalAmount() + addedProductAmount);
+		shoppingCartService.addItem(shoppingCart, product, quantity);
 		return new ResponseEntity<>("Item is added successfully", HttpStatus.CREATED);
 	}
 
@@ -57,10 +48,10 @@ public class ShoppingCartController {
 		return new ResponseEntity<>("Coupon is applied successfully", HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/calculateDeleveryCost")
-	public ResponseEntity<Object> calculateDeleveryCost() {
+	@RequestMapping(value = "/calculateDeliveryCost")
+	public ResponseEntity<Object> calculateDeliveryCost() {
 		deliveryCostCalculator.calculateFor(shoppingCart);
-		return new ResponseEntity<>("Delevery Cost is calculated successfully", HttpStatus.OK);
+		return new ResponseEntity<>("Delivery Cost is calculated successfully", HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/print")

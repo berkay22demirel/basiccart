@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.berkay22demirel.basiccart.entity.Category;
 import com.berkay22demirel.basiccart.service.ICategoryService;
 
-@RestController(value = "/category")
+@RestController
+@RequestMapping(value = "category")
 public class CategoryController {
 
 	@Autowired

@@ -9,7 +9,9 @@ public class ConsoleUtil {
 		int consoleWidth = 150;
 		int partWidth = 25;
 		addStringToConsole("/", consoleWidth);
+		System.out.print("\n");
 		addStringToConsole("/", consoleWidth);
+		System.out.print("\n");
 		System.out.println(
 				"Kategori Adı             Ürün Adı                 Miktar                   Birim Fiyatı             Toplam Fiyat             Uygulanan Toplam İndirim ");
 		for (ShoppingCartItem shoppingCartItem : shoppingCart.getShoppingCartItems()) {
@@ -33,6 +35,8 @@ public class ConsoleUtil {
 					+ shoppingCartItem.getCouponDiscountAmountPerProduct();
 			System.out.print(totalDiscount);
 			addSpaceStringToConsole(partWidth - String.valueOf(totalDiscount).length());
+
+			System.out.print("\n");
 		}
 	}
 

@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.berkay22demirel.basiccart.entity.Product;
 import com.berkay22demirel.basiccart.service.IProductService;
 
-@RestController(value = "/product")
+@RestController
+@RequestMapping(value = "/product")
 public class ProductController {
 
 	@Autowired

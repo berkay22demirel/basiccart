@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.berkay22demirel.basiccart.dao.IShoppingCartDao;
 import com.berkay22demirel.basiccart.entity.Campaign;
-import com.berkay22demirel.basiccart.entity.Category;
 import com.berkay22demirel.basiccart.entity.Coupon;
 import com.berkay22demirel.basiccart.entity.Product;
 import com.berkay22demirel.basiccart.entity.ShoppingCart;
@@ -46,31 +45,16 @@ public class ShoppingCartService implements IShoppingCartService {
 	}
 
 	@Override
-	public ShoppingCartItem findMatchingItem(List<ShoppingCartItem> shoppingCartItems, Product product) {
-		for (ShoppingCartItem shoppingCartItem : shoppingCartItems) {
-			if (shoppingCartItem.getProduct().equals(product)) {
-				return shoppingCartItem;
-			}
+	public void addItem(ShoppingCart shoppingCart, Product product, int quantity) {
+		ShoppingCartItem matchingItem = findMatchingItem(shoppingCart.getShoppingCartItems(), product);
+		if (matchingItem == null) {
+			ShoppingCartItem shoppingCartItem = new ShoppingCartItem(product, quantity);
+			shoppingCart.getShoppingCartItems().add(shoppingCartItem);
+		} else {
+			matchingItem.setQuantity(matchingItem.getQuantity() + quantity);
 		}
-		return null;
-	}
-
-	@Override
-	public List<Campaign> findApplicableCampaigns(ShoppingCart shoppingCart, List<Campaign> campaigns) {
-		List<Campaign> applicableCampaigns = new ArrayList<>();
-		for (Campaign campaign : campaigns) {
-			Category campaignCategory = campaign.getCategory();
-			int numberOfProductsInCategory = 0;
-			for (ShoppingCartItem shoppingCartItem : shoppingCart.getShoppingCartItems()) {
-				if (shoppingCartItem.getProduct().getCategory().equals(campaignCategory)) {
-					numberOfProductsInCategory++;
-				}
-			}
-			if (numberOfProductsInCategory > campaign.getMinimumItemCount()) {
-				applicableCampaigns.add(campaign);
-			}
-		}
-		return applicableCampaigns;
+		double addedProductAmount = product.getPrice() * quantity;
+		shoppingCart.setTotalAmount(shoppingCart.getTotalAmount() + addedProductAmount);
 	}
 
 	@Override
@@ -95,6 +79,15 @@ public class ShoppingCartService implements IShoppingCartService {
 			return true;
 		}
 		return false;
+	}
+
+	private ShoppingCartItem findMatchingItem(List<ShoppingCartItem> shoppingCartItems, Product product) {
+		for (ShoppingCartItem shoppingCartItem : shoppingCartItems) {
+			if (shoppingCartItem.getProduct().equals(product)) {
+				return shoppingCartItem;
+			}
+		}
+		return null;
 	}
 
 	private List<ShoppingCartItem> findCampaignApplicableShoppingCartItems(Campaign campaign,

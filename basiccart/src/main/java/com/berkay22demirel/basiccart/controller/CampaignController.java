@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.berkay22demirel.basiccart.entity.Campaign;
 import com.berkay22demirel.basiccart.service.ICampaignService;
 
-@RestController(value = "/campaign")
+@RestController
+@RequestMapping(value = "/campaign")
 public class CampaignController {
 
 	@Autowired

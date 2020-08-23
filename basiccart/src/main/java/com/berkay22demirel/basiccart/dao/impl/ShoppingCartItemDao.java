@@ -8,4 +8,8 @@ import com.berkay22demirel.basiccart.entity.ShoppingCartItem;
 @Repository
 public class ShoppingCartItemDao extends DaoSupoort<ShoppingCartItem> implements IShoppingCartItemDao {
 
+	public ShoppingCartItemDao() {
+		super(ShoppingCartItem.class);
+	}
+
 }

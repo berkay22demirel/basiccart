@@ -6,7 +6,6 @@ import com.berkay22demirel.basiccart.entity.Campaign;
 import com.berkay22demirel.basiccart.entity.Coupon;
 import com.berkay22demirel.basiccart.entity.Product;
 import com.berkay22demirel.basiccart.entity.ShoppingCart;
-import com.berkay22demirel.basiccart.entity.ShoppingCartItem;
 
 public interface IShoppingCartService extends IService {
 
@@ -18,9 +17,7 @@ public interface IShoppingCartService extends IService {
 
 	List<ShoppingCart> getAllShoppingCarts();
 
-	ShoppingCartItem findMatchingItem(List<ShoppingCartItem> shoppingCartItems, Product product);
-
-	List<Campaign> findApplicableCampaigns(ShoppingCart shoppingCart, List<Campaign> campaigns);
+	void addItem(ShoppingCart shoppingCart, Product product, int quantity);
 
 	void applyDiscount(ShoppingCart shoppingCart, List<Campaign> campaigns);
 

@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.berkay22demirel.basiccart.entity.Coupon;
 import com.berkay22demirel.basiccart.service.ICouponService;
 
-@RestController(value = "/coupon")
+@RestController
+@RequestMapping(value = "/coupon")
 public class CouponController {
 
 	@Autowired
