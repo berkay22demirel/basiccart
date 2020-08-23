@@ -3,7 +3,13 @@ package com.berkay22demirel.basiccart.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.berkay22demirel.basiccart.entity.Campaign;
 import com.berkay22demirel.basiccart.entity.Coupon;
@@ -14,7 +20,7 @@ import com.berkay22demirel.basiccart.service.IDeliveryCostCalculator;
 import com.berkay22demirel.basiccart.service.IShoppingCartService;
 import com.berkay22demirel.basiccart.util.ConsoleUtil;
 
-@Controller
+@RestController(value = "/shoppingcart")
 public class ShoppingCartController {
 
 	@Autowired
@@ -24,7 +30,8 @@ public class ShoppingCartController {
 
 	private ShoppingCart shoppingCart = new ShoppingCart();
 
-	public void addItem(Product product, int quantity) {
+	@RequestMapping(value = "/add/{quantity}", method = RequestMethod.POST)
+	public ResponseEntity<Object> addItem(@RequestBody Product product, @PathVariable("quantity") int quantity) {
 		ShoppingCartItem matchingItem = shoppingCartService.findMatchingItem(shoppingCart.getShoppingCartItems(),
 				product);
 		if (matchingItem == null) {
@@ -35,22 +42,31 @@ public class ShoppingCartController {
 		}
 		double addedProductAmount = product.getPrice() * quantity;
 		shoppingCart.setTotalAmount(shoppingCart.getTotalAmount() + addedProductAmount);
+		return new ResponseEntity<>("Item is added successfully", HttpStatus.CREATED);
 	}
 
-	public void applyDiscount(List<Campaign> campaigns) {
+	@RequestMapping(value = "/applyDiscount", method = RequestMethod.POST)
+	public ResponseEntity<Object> applyDiscount(@RequestBody List<Campaign> campaigns) {
 		shoppingCartService.applyDiscount(shoppingCart, campaigns);
+		return new ResponseEntity<>("Discount is applied successfully", HttpStatus.OK);
 	}
 
-	public void applyCoupon(Coupon coupon) {
+	@RequestMapping(value = "/applyCoupon", method = RequestMethod.POST)
+	public ResponseEntity<Object> applyCoupon(@RequestBody Coupon coupon) {
 		shoppingCartService.applyCoupon(shoppingCart, coupon);
+		return new ResponseEntity<>("Coupon is applied successfully", HttpStatus.OK);
 	}
 
-	public void calculateDeleveryCost() {
+	@RequestMapping(value = "/calculateDeleveryCost")
+	public ResponseEntity<Object> calculateDeleveryCost() {
 		deliveryCostCalculator.calculateFor(shoppingCart);
+		return new ResponseEntity<>("Delevery Cost is calculated successfully", HttpStatus.OK);
 	}
 
-	public void print() {
+	@RequestMapping(value = "/print")
+	public ResponseEntity<Object> print() {
 		ConsoleUtil.print(shoppingCart);
+		return new ResponseEntity<>("Printed successfully", HttpStatus.OK);
 	}
 
 }

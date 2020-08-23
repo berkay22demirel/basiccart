@@ -1,33 +1,43 @@
 package com.berkay22demirel.basiccart.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.berkay22demirel.basiccart.entity.Category;
 import com.berkay22demirel.basiccart.service.ICategoryService;
 
-@Controller
+@RestController(value = "/category")
 public class CategoryController {
 
 	@Autowired
 	ICategoryService categoryService;
 
-	public void addCategory(Category category) {
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public ResponseEntity<Object> addCategory(@RequestBody Category category) {
 		categoryService.addCategory(category);
+		return new ResponseEntity<>("Category is created successfully", HttpStatus.CREATED);
 	}
 
-	public void updateCategory(Category category) {
+	@RequestMapping(value = "/update", method = RequestMethod.PUT)
+	public ResponseEntity<Object> updateCategory(@RequestBody Category category) {
 		categoryService.updateCategory(category);
+		return new ResponseEntity<>("Category is updated successsfully", HttpStatus.OK);
 	}
 
-	public void deleteCategory(Category category) {
+	@RequestMapping(value = "/delete", method = RequestMethod.PUT)
+	public ResponseEntity<Object> deleteCategory(@RequestBody Category category) {
 		categoryService.deleteCategory(category);
+		return new ResponseEntity<>("Category is deleted successsfully", HttpStatus.OK);
 	}
 
-	public List<Category> getAllCategories() {
-		return categoryService.getAllCategories();
+	@RequestMapping(value = "/getAll")
+	public ResponseEntity<Object> getAllCategories() {
+		return new ResponseEntity<>(categoryService.getAllCategories(), HttpStatus.OK);
 	}
 
 }

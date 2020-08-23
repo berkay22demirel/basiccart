@@ -1,33 +1,43 @@
 package com.berkay22demirel.basiccart.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.berkay22demirel.basiccart.entity.Product;
 import com.berkay22demirel.basiccart.service.IProductService;
 
-@Controller
+@RestController(value = "/product")
 public class ProductController {
 
 	@Autowired
 	IProductService productService;
 
-	public void addProduct(Product product) {
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public ResponseEntity<Object> addProduct(@RequestBody Product product) {
 		productService.addProduct(product);
+		return new ResponseEntity<>("Product is created successfully", HttpStatus.CREATED);
 	}
 
-	public void updateProduct(Product product) {
+	@RequestMapping(value = "/update", method = RequestMethod.PUT)
+	public ResponseEntity<Object> updateProduct(@RequestBody Product product) {
 		productService.updateProduct(product);
+		return new ResponseEntity<>("Product is updated successsfully", HttpStatus.OK);
 	}
 
-	public void deleteProduct(Product product) {
+	@RequestMapping(value = "/delete", method = RequestMethod.PUT)
+	public ResponseEntity<Object> deleteProduct(@RequestBody Product product) {
 		productService.deleteProduct(product);
+		return new ResponseEntity<>("Product is deleted successsfully", HttpStatus.OK);
 	}
 
-	public List<Product> getAllProduct() {
-		return productService.getAllProducts();
+	@RequestMapping(value = "/getAll")
+	public ResponseEntity<Object> getAllProduct() {
+		return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
 	}
 
 }
