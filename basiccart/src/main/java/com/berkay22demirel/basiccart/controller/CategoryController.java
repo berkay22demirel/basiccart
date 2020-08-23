@@ -31,7 +31,7 @@ public class CategoryController {
 		return new ResponseEntity<>("Category is updated successsfully", HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> deleteCategory(@PathVariable("id") long id) {
 		categoryService.deleteCategory(id);
 		return new ResponseEntity<>("Category is deleted successsfully", HttpStatus.OK);

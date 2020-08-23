@@ -13,7 +13,7 @@ import com.berkay22demirel.basiccart.entity.ShoppingCartItem;
 
 public class Database {
 
-	private static Map<Long, Object> campaing = new HashMap<>();
+	private static Map<Long, Object> campaign = new HashMap<>();
 	private static Map<Long, Object> category = new HashMap<>();
 	private static Map<Long, Object> coupon = new HashMap<>();
 	private static Map<Long, Object> product = new HashMap<>();
@@ -21,16 +21,15 @@ public class Database {
 	private static Map<Long, Object> shoppingCartItem = new HashMap<>();
 
 	static {
-		Category category = new Category("meyve");
-		category.setId(1);
-		Campaign campaign = new Campaign(category, 15.0, 3, DiscountType.RATE);
-		campaign.setId(1);
-		campaing.put(1l, campaign);
+		Category category1 = new Category(1, "kitap");
+		Campaign campaign1 = new Campaign(1, category1, 15.0, 3, DiscountType.RATE);
+		category.put(1l, category1);
+		campaign.put(1l, campaign1);
 	}
 
 	public static Map<Long, Object> getTable(Object obj) {
 		if (obj.equals(Campaign.class)) {
-			return campaing;
+			return campaign;
 		}
 		if (obj.equals(Category.class)) {
 			return category;
