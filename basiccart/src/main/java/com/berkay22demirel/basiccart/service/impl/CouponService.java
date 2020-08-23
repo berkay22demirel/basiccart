@@ -28,8 +28,8 @@ public class CouponService implements ICouponService {
 	}
 
 	@Override
-	public void deleteCoupon(Coupon coupon) {
-		couponDao.delete(coupon);
+	public void deleteCoupon(long id) {
+		couponDao.delete(id);
 
 	}
 

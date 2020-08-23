@@ -21,4 +21,15 @@ public class Category extends BaseEntity {
 		this.topCategory = topCategory;
 	}
 
+	public Category(long id, String title, Category topCategory) {
+		super();
+		super.setId(id);
+		this.title = title;
+		this.topCategory = topCategory;
+	}
+
+	public Category() {
+		super();
+	}
+
 }

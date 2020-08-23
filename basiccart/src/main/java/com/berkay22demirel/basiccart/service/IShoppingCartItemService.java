@@ -10,7 +10,7 @@ public interface IShoppingCartItemService extends IService {
 
 	void updateShoppingCartItem(ShoppingCartItem shoppingCartItem);
 
-	void deleteShoppingCartItem(ShoppingCartItem shoppingCartItem);
+	void deleteShoppingCartItem(long id);
 
 	List<ShoppingCartItem> getAllCategories();
 

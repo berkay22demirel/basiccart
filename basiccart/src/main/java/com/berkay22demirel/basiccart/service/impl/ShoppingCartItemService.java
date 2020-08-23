@@ -28,8 +28,8 @@ public class ShoppingCartItemService implements IShoppingCartItemService {
 	}
 
 	@Override
-	public void deleteShoppingCartItem(ShoppingCartItem shoppingCartItem) {
-		shoppingCartItemDao.delete(shoppingCartItem);
+	public void deleteShoppingCartItem(long id) {
+		shoppingCartItemDao.delete(id);
 
 	}
 

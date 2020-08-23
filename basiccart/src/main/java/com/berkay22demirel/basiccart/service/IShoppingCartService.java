@@ -13,7 +13,7 @@ public interface IShoppingCartService extends IService {
 
 	void updateShoppingCart(ShoppingCart shoppingCart);
 
-	void deleteShoppingCart(ShoppingCart shoppingCart);
+	void deleteShoppingCart(long id);
 
 	List<ShoppingCart> getAllShoppingCarts();
 

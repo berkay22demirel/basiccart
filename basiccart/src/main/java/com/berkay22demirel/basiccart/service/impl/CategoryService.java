@@ -28,8 +28,8 @@ public class CategoryService implements ICategoryService {
 	}
 
 	@Override
-	public void deleteCategory(Category category) {
-		categoryDao.delete(category);
+	public void deleteCategory(long id) {
+		categoryDao.delete(id);
 
 	}
 

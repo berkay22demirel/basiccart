@@ -10,7 +10,7 @@ public interface IProductService extends IService {
 
 	void updateProduct(Product product);
 
-	void deleteProduct(Product product);
+	void deleteProduct(long id);
 
 	List<Product> getAllProducts();
 

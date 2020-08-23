@@ -3,6 +3,7 @@ package com.berkay22demirel.basiccart.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,9 +31,9 @@ public class CategoryController {
 		return new ResponseEntity<>("Category is updated successsfully", HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.PUT)
-	public ResponseEntity<Object> deleteCategory(@RequestBody Category category) {
-		categoryService.deleteCategory(category);
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Object> deleteCategory(@PathVariable("id") long id) {
+		categoryService.deleteCategory(id);
 		return new ResponseEntity<>("Category is deleted successsfully", HttpStatus.OK);
 	}
 

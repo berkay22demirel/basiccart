@@ -33,9 +33,8 @@ public abstract class DaoSupoort<T> implements IDao<T> {
 	}
 
 	@Override
-	public void delete(T object) {
+	public void delete(long id) {
 		Map<Long, Object> table = Database.getTable(type);
-		Long id = ((BaseEntity) object).getId();
 		table.remove(id);
 	}
 

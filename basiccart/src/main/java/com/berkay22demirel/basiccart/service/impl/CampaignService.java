@@ -28,8 +28,8 @@ public class CampaignService implements ICampaignService {
 	}
 
 	@Override
-	public void deleteCampaign(Campaign campaign) {
-		campaignDao.delete(campaign);
+	public void deleteCampaign(long id) {
+		campaignDao.delete(id);
 
 	}
 

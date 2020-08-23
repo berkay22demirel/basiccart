@@ -10,7 +10,7 @@ public interface ICampaignService extends IService {
 
 	void updateCampaign(Campaign campaign);
 
-	void deleteCampaign(Campaign campaign);
+	void deleteCampaign(long id);
 
 	List<Campaign> getAllCampaigns();
 

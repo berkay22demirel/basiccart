@@ -8,7 +8,7 @@ public interface IDao<T> {
 
 	public void update(T object);
 
-	public void delete(T object);
+	public void delete(long id);
 
 	public T findById(long id);
 

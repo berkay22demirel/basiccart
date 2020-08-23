@@ -22,4 +22,21 @@ public class Campaign extends BaseEntity {
 		this.discountType = discountType;
 	}
 
+	public Campaign(long id) {
+		super.setId(id);
+	}
+
+	public Campaign(long id, Category category, double discount, int minimumItemCount, DiscountType discountType) {
+		super();
+		super.setId(id);
+		this.category = category;
+		this.discount = discount;
+		this.minimumItemCount = minimumItemCount;
+		this.discountType = discountType;
+	}
+
+	public Campaign() {
+		super();
+	}
+
 }

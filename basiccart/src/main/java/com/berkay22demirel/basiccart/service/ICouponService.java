@@ -10,7 +10,7 @@ public interface ICouponService extends IService {
 
 	void updateCoupon(Coupon coupon);
 
-	void deleteCoupon(Coupon coupon);
+	void deleteCoupon(long id);
 
 	List<Coupon> getAllCoupons();
 

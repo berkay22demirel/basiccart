@@ -3,6 +3,7 @@ package com.berkay22demirel.basiccart.dao;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.berkay22demirel.basiccart.constant.DiscountType;
 import com.berkay22demirel.basiccart.entity.Campaign;
 import com.berkay22demirel.basiccart.entity.Category;
 import com.berkay22demirel.basiccart.entity.Coupon;
@@ -18,6 +19,14 @@ public class Database {
 	private static Map<Long, Object> product = new HashMap<>();
 	private static Map<Long, Object> shoppingCart = new HashMap<>();
 	private static Map<Long, Object> shoppingCartItem = new HashMap<>();
+
+	static {
+		Category category = new Category("meyve");
+		category.setId(1);
+		Campaign campaign = new Campaign(category, 15.0, 3, DiscountType.RATE);
+		campaign.setId(1);
+		campaing.put(1l, campaign);
+	}
 
 	public static Map<Long, Object> getTable(Object obj) {
 		if (obj.equals(Campaign.class)) {
