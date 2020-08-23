@@ -10,6 +10,7 @@ import com.berkay22demirel.basiccart.entity.Coupon;
 import com.berkay22demirel.basiccart.entity.Product;
 import com.berkay22demirel.basiccart.entity.ShoppingCart;
 import com.berkay22demirel.basiccart.entity.ShoppingCartItem;
+import com.berkay22demirel.basiccart.service.IDeliveryCostCalculator;
 import com.berkay22demirel.basiccart.service.IShoppingCartService;
 
 @Controller
@@ -17,6 +18,8 @@ public class ShoppingCartController {
 
 	@Autowired
 	private IShoppingCartService shoppingCartService;
+	@Autowired
+	private IDeliveryCostCalculator deliveryCostCalculator;
 
 	private ShoppingCart shoppingCart = new ShoppingCart();
 
@@ -39,6 +42,10 @@ public class ShoppingCartController {
 
 	public void applyCoupon(Coupon coupon) {
 		shoppingCartService.applyCoupon(shoppingCart, coupon);
+	}
+
+	public void calculateDeleveryCost() {
+		deliveryCostCalculator.calculateFor(shoppingCart);
 	}
 
 }

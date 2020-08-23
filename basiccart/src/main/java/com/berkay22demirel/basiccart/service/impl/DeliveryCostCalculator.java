@@ -22,24 +22,37 @@ public class DeliveryCostCalculator implements IDeliveryCostCalculator {
 		this.fixedCost = fixedCost;
 	}
 
+	@Override
 	public double calculateFor(ShoppingCart shoppingCart) {
+		int numberOfDeliveries = calculateNumberOfDeliveries(shoppingCart);
+		int numberOfProducts = calculateNumberOfProducts(shoppingCart);
+		double deliveryCost = (costPerDelivery * numberOfDeliveries) + (costPerProduct * numberOfProducts) + fixedCost;
+		shoppingCart.setDeliveryCost(deliveryCost);
+		return deliveryCost;
+	}
+
+	@Override
+	public int calculateNumberOfDeliveries(ShoppingCart shoppingCart) {
 		List<ShoppingCartItem> shoppingCartItems = shoppingCart.getShoppingCartItems();
 		int numberOfDeliveries = shoppingCartItems.size();
-		int numberOfProducts = 0;
 		int iterator = 1;
 		for (int i = iterator; i < shoppingCartItems.size(); i++) {
-			numberOfProducts++;
 			int numberOfSameCategory = 0;
-			numberOfProducts++;
 			for (int j = i + 1; j < shoppingCartItems.size(); j++) {
 				if (shoppingCartItems.get(i).getProduct().getCategory()
 						.equals(shoppingCartItems.get(j).getProduct().getCategory())) {
 					numberOfSameCategory++;
 				}
 			}
-			numberOfDeliveries = numberOfDeliveries - numberOfSameCategory;
+			numberOfDeliveries -= numberOfSameCategory;
 		}
-		return (costPerDelivery * numberOfDeliveries) + (costPerProduct * numberOfProducts) + fixedCost;
+		return numberOfDeliveries;
+
+	}
+
+	@Override
+	public int calculateNumberOfProducts(ShoppingCart shoppingCart) {
+		return shoppingCart.getShoppingCartItems().size();
 	}
 
 }
