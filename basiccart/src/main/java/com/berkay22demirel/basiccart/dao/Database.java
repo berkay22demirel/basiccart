@@ -23,8 +23,10 @@ public class Database {
 	static {
 		Category category1 = new Category(1, "kitap");
 		Campaign campaign1 = new Campaign(1, category1, 15.0, 3, DiscountType.RATE);
+		Coupon coupon1 = new Coupon(1, 50, 5, DiscountType.AMOUNT);
 		category.put(1l, category1);
 		campaign.put(1l, campaign1);
+		coupon.put(1l, coupon1);
 	}
 
 	public static Map<Long, Object> getTable(Object obj) {

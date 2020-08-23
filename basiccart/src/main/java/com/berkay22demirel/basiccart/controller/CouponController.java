@@ -31,7 +31,7 @@ public class CouponController {
 		return new ResponseEntity<>("Coupon is updated successsfully", HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> deleteCoupon(@PathVariable("id") long id) {
 		couponService.deleteCoupon(id);
 		return new ResponseEntity<>("Coupon is deleted successsfully", HttpStatus.OK);
