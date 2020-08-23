@@ -18,4 +18,15 @@ public class Product extends BaseEntity {
 		this.category = category;
 	}
 
+	public Product(long id, String name, double price, Category category) {
+		super();
+		super.setId(id);
+		this.name = name;
+		this.price = price;
+		this.category = category;
+	}
+
+	public Product() {
+	}
+
 }

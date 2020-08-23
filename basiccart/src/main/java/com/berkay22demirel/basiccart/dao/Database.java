@@ -22,11 +22,15 @@ public class Database {
 
 	static {
 		Category category1 = new Category(1, "kitap");
+		Category category2 = new Category(2, "meyve");
 		Campaign campaign1 = new Campaign(1, category1, 15.0, 3, DiscountType.RATE);
 		Coupon coupon1 = new Coupon(1, 50, 5, DiscountType.AMOUNT);
+		Product product1 = new Product(1, "elma", 5.0, category2);
 		category.put(1l, category1);
+		category.put(2l, category2);
 		campaign.put(1l, campaign1);
 		coupon.put(1l, coupon1);
+		product.put(1l, product1);
 	}
 
 	public static Map<Long, Object> getTable(Object obj) {

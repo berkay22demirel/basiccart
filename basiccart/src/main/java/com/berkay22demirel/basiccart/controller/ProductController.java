@@ -31,7 +31,7 @@ public class ProductController {
 		return new ResponseEntity<>("Product is updated successsfully", HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> deleteProduct(@PathVariable("id") long id) {
 		productService.deleteProduct(id);
 		return new ResponseEntity<>("Product is deleted successsfully", HttpStatus.OK);
