@@ -9,6 +9,8 @@ public class ShoppingCartItem extends BaseEntity {
 
 	private Product product;
 	private int quantity;
+	private double campaignDiscountAmount;
+	private double couponDiscountAmount;
 
 	public ShoppingCartItem(Product product, int quantity) {
 		super();

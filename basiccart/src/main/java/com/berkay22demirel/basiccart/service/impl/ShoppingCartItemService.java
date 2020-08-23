@@ -3,11 +3,13 @@ package com.berkay22demirel.basiccart.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.berkay22demirel.basiccart.dao.IShoppingCartItemDao;
 import com.berkay22demirel.basiccart.entity.ShoppingCartItem;
 import com.berkay22demirel.basiccart.service.IShoppingCartItemService;
 
+@Service
 public class ShoppingCartItemService implements IShoppingCartItemService {
 
 	@Autowired

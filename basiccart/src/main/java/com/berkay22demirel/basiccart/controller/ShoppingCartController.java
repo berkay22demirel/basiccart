@@ -12,6 +12,7 @@ import com.berkay22demirel.basiccart.entity.ShoppingCart;
 import com.berkay22demirel.basiccart.entity.ShoppingCartItem;
 import com.berkay22demirel.basiccart.service.IDeliveryCostCalculator;
 import com.berkay22demirel.basiccart.service.IShoppingCartService;
+import com.berkay22demirel.basiccart.util.ConsoleUtil;
 
 @Controller
 public class ShoppingCartController {
@@ -46,6 +47,10 @@ public class ShoppingCartController {
 
 	public void calculateDeleveryCost() {
 		deliveryCostCalculator.calculateFor(shoppingCart);
+	}
+
+	public void print() {
+		ConsoleUtil.print(shoppingCart);
 	}
 
 }

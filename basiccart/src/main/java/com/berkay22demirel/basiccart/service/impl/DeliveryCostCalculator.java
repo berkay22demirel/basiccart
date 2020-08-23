@@ -22,6 +22,10 @@ public class DeliveryCostCalculator implements IDeliveryCostCalculator {
 		this.fixedCost = fixedCost;
 	}
 
+	public DeliveryCostCalculator() {
+		super();
+	}
+
 	@Override
 	public double calculateFor(ShoppingCart shoppingCart) {
 		int numberOfDeliveries = calculateNumberOfDeliveries(shoppingCart);

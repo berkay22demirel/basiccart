@@ -26,4 +26,8 @@ public class ShoppingCart {
 		couponDiscountAmount = 0;
 	}
 
+	private double getTotalAmountAfterDiscount() {
+		return totalAmount - campaignDiscountAmount - couponDiscountAmount;
+	}
+
 }
