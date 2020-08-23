@@ -29,8 +29,8 @@ public class ConsoleUtil {
 			System.out.print(totalAmount);
 			addSpaceStringToConsole(partWidth - String.valueOf(totalAmount).length());
 
-			double totalDiscount = shoppingCartItem.getCampaignDiscountAmount()
-					+ shoppingCartItem.getCouponDiscountAmount();
+			double totalDiscount = shoppingCartItem.getCampaignDiscountAmountPerProduct()
+					+ shoppingCartItem.getCouponDiscountAmountPerProduct();
 			System.out.print(totalDiscount);
 			addSpaceStringToConsole(partWidth - String.valueOf(totalDiscount).length());
 		}

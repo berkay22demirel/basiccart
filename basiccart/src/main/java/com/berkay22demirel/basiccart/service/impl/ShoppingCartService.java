@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.berkay22demirel.basiccart.constant.DiscountType;
 import com.berkay22demirel.basiccart.dao.IShoppingCartDao;
 import com.berkay22demirel.basiccart.entity.Campaign;
 import com.berkay22demirel.basiccart.entity.Category;
@@ -76,37 +75,71 @@ public class ShoppingCartService implements IShoppingCartService {
 
 	@Override
 	public void applyDiscount(ShoppingCart shoppingCart, List<Campaign> campaigns) {
-		List<Campaign> applicableCampaigns = findApplicableCampaigns(shoppingCart, campaigns);
-		double discountRate = 0;
-		double discountAmount = 0;
-		for (Campaign campaign : applicableCampaigns) {
-			if (DiscountType.RATE.equals(campaign.getDiscountType())) {
-				discountRate += campaign.getDiscount();
-			} else if (DiscountType.AMOUNT.equals(campaign.getDiscountType())) {
-				discountAmount += campaign.getDiscount();
-			}
+		double totalDiscountAmount = 0;
+		for (Campaign campaign : campaigns) {
+			List<ShoppingCartItem> campaignApplicableShoppingCartItems = findCampaignApplicableShoppingCartItems(
+					campaign, shoppingCart.getShoppingCartItems());
+			totalDiscountAmount += applyDiscountForShoppingCartItems(campaign, campaignApplicableShoppingCartItems);
 		}
-		double campaignDiscountAmount = DiscountUtil.findDiscountAmountForRate(shoppingCart.getTotalAmount(),
-				discountRate) + discountAmount;
-		shoppingCart.setCampaignDiscountAmount(campaignDiscountAmount);
+		shoppingCart.setCampaignDiscountAmount(totalDiscountAmount);
 		shoppingCart.setCampaigns(campaigns);
 	}
 
 	@Override
 	public boolean applyCoupon(ShoppingCart shoppingCart, Coupon coupon) {
 		if (shoppingCart.getTotalAmount() > coupon.getMinimumAmount()) {
-			double discountAmount = 0;
-			if (DiscountType.RATE.equals(coupon.getDiscountType())) {
-				discountAmount = DiscountUtil.findDiscountAmountForRate(shoppingCart.getTotalAmount(),
-						coupon.getDiscount());
-			} else if (DiscountType.AMOUNT.equals(coupon.getDiscountType())) {
-				discountAmount = coupon.getDiscount();
-			}
+			double discountAmount = applyCouponForShoppingCartItems(coupon, shoppingCart.getShoppingCartItems(),
+					shoppingCart.getTotalAmount());
 			shoppingCart.setCouponDiscountAmount(discountAmount);
 			shoppingCart.setCoupon(coupon);
 			return true;
 		}
 		return false;
+	}
+
+	private List<ShoppingCartItem> findCampaignApplicableShoppingCartItems(Campaign campaign,
+			List<ShoppingCartItem> shoppingCartItems) {
+		List<ShoppingCartItem> campaignApplicableShoppingCartItems = new ArrayList<>();
+		for (ShoppingCartItem shoppingCartItem : shoppingCartItems) {
+			if (campaign.getCategory().equals(shoppingCartItem.getProduct().getCategory())) {
+				campaignApplicableShoppingCartItems.add(shoppingCartItem);
+			}
+		}
+		return campaignApplicableShoppingCartItems;
+	}
+
+	private double applyDiscountForShoppingCartItems(Campaign campaign, List<ShoppingCartItem> shoppingCartItems) {
+		double totalDiscountAmount = 0;
+		int numberOfProducts = findNumberOfProducts(shoppingCartItems);
+		if (numberOfProducts > campaign.getMinimumItemCount()) {
+			for (ShoppingCartItem shoppingCartItem : shoppingCartItems) {
+				double discountAmount = DiscountUtil.findDiscountAmount(shoppingCartItem.getProduct().getPrice(),
+						campaign);
+				shoppingCartItem.setCampaignDiscountAmountPerProduct(discountAmount);
+				totalDiscountAmount += (discountAmount * shoppingCartItem.getQuantity());
+			}
+		}
+		return totalDiscountAmount;
+	}
+
+	private double applyCouponForShoppingCartItems(Coupon coupon, List<ShoppingCartItem> shoppingCartItems,
+			double totalAmount) {
+		double totalDiscountAmount = 0;
+		for (ShoppingCartItem shoppingCartItem : shoppingCartItems) {
+			double discountAmount = DiscountUtil.findDiscountAmount(totalAmount,
+					shoppingCartItem.getProduct().getPrice(), coupon);
+			shoppingCartItem.setCampaignDiscountAmountPerProduct(discountAmount);
+			totalDiscountAmount += (discountAmount * shoppingCartItem.getQuantity());
+		}
+		return totalDiscountAmount;
+	}
+
+	private int findNumberOfProducts(List<ShoppingCartItem> shoppingCartItems) {
+		int numberOfProducts = 0;
+		for (ShoppingCartItem shoppingCartItem : shoppingCartItems) {
+			numberOfProducts += shoppingCartItem.getQuantity();
+		}
+		return numberOfProducts;
 	}
 
 }
