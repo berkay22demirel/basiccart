@@ -26,29 +26,4 @@ public class ShoppingCart {
 		couponDiscountAmount = 0;
 	}
 
-	public void addItem(Product product, int quantity) {
-		boolean isExist = false;
-		for (ShoppingCartItem shoppingCartItem : shoppingCartItems) {
-			if (shoppingCartItem.getProduct().equals(product)) {
-				shoppingCartItem.setQuantity(shoppingCartItem.getQuantity() + quantity);
-				isExist = true;
-				break;
-			}
-		}
-		if (!isExist) {
-			ShoppingCartItem shoppingCartItem = new ShoppingCartItem(product, quantity);
-			shoppingCartItems.add(shoppingCartItem);
-		}
-		totalAmount += (product.getPrice() * quantity);
-	}
-
-	public void applyDiscount(List<Campaign> campaigns) {
-		this.campaigns = campaigns;
-
-	}
-
-	public void applyCoupon(Coupon coupon) {
-		this.coupon = coupon;
-	}
-
 }
