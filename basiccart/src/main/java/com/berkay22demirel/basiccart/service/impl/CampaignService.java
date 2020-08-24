@@ -9,7 +9,10 @@ import com.berkay22demirel.basiccart.dao.ICampaignDao;
 import com.berkay22demirel.basiccart.entity.Campaign;
 import com.berkay22demirel.basiccart.service.ICampaignService;
 
+import lombok.Setter;
+
 @Service
+@Setter
 public class CampaignService implements ICampaignService {
 
 	@Autowired

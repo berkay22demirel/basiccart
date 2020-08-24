@@ -9,7 +9,10 @@ import com.berkay22demirel.basiccart.dao.IShoppingCartItemDao;
 import com.berkay22demirel.basiccart.entity.ShoppingCartItem;
 import com.berkay22demirel.basiccart.service.IShoppingCartItemService;
 
+import lombok.Setter;
+
 @Service
+@Setter
 public class ShoppingCartItemService implements IShoppingCartItemService {
 
 	@Autowired
@@ -34,7 +37,7 @@ public class ShoppingCartItemService implements IShoppingCartItemService {
 	}
 
 	@Override
-	public List<ShoppingCartItem> getAllCategories() {
+	public List<ShoppingCartItem> getAllShoppingCartItems() {
 		return shoppingCartItemDao.findAll();
 	}
 

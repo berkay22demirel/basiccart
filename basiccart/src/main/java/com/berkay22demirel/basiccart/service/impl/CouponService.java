@@ -9,7 +9,10 @@ import com.berkay22demirel.basiccart.dao.ICouponDao;
 import com.berkay22demirel.basiccart.entity.Coupon;
 import com.berkay22demirel.basiccart.service.ICouponService;
 
+import lombok.Setter;
+
 @Service
+@Setter
 public class CouponService implements ICouponService {
 
 	@Autowired

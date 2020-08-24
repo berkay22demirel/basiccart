@@ -9,7 +9,10 @@ import com.berkay22demirel.basiccart.dao.IProductDao;
 import com.berkay22demirel.basiccart.entity.Product;
 import com.berkay22demirel.basiccart.service.IProductService;
 
+import lombok.Setter;
+
 @Service
+@Setter
 public class ProductService implements IProductService {
 
 	@Autowired

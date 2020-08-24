@@ -16,7 +16,10 @@ import com.berkay22demirel.basiccart.entity.ShoppingCartItem;
 import com.berkay22demirel.basiccart.service.IShoppingCartService;
 import com.berkay22demirel.basiccart.util.DiscountUtil;
 
+import lombok.Setter;
+
 @Service
+@Setter
 public class ShoppingCartService implements IShoppingCartService {
 
 	@Autowired

@@ -9,7 +9,10 @@ import com.berkay22demirel.basiccart.dao.ICategoryDao;
 import com.berkay22demirel.basiccart.entity.Category;
 import com.berkay22demirel.basiccart.service.ICategoryService;
 
+import lombok.Setter;
+
 @Service
+@Setter
 public class CategoryService implements ICategoryService {
 
 	@Autowired

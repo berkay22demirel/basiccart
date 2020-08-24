@@ -12,6 +12,6 @@ public interface IShoppingCartItemService extends IService {
 
 	long deleteShoppingCartItem(long id);
 
-	List<ShoppingCartItem> getAllCategories();
+	List<ShoppingCartItem> getAllShoppingCartItems();
 
 }
