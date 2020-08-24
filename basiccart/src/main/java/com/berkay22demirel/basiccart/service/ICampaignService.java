@@ -6,11 +6,11 @@ import com.berkay22demirel.basiccart.entity.Campaign;
 
 public interface ICampaignService extends IService {
 
-	void addCampaign(Campaign campaign);
+	long addCampaign(Campaign campaign);
 
-	void updateCampaign(Campaign campaign);
+	long updateCampaign(Campaign campaign);
 
-	void deleteCampaign(long id);
+	long deleteCampaign(long id);
 
 	List<Campaign> getAllCampaigns();
 

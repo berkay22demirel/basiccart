@@ -6,11 +6,11 @@ import com.berkay22demirel.basiccart.entity.ShoppingCartItem;
 
 public interface IShoppingCartItemService extends IService {
 
-	void addShoppingCartItem(ShoppingCartItem shoppingCartItem);
+	long addShoppingCartItem(ShoppingCartItem shoppingCartItem);
 
-	void updateShoppingCartItem(ShoppingCartItem shoppingCartItem);
+	long updateShoppingCartItem(ShoppingCartItem shoppingCartItem);
 
-	void deleteShoppingCartItem(long id);
+	long deleteShoppingCartItem(long id);
 
 	List<ShoppingCartItem> getAllCategories();
 

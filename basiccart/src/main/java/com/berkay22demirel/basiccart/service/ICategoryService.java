@@ -6,11 +6,11 @@ import com.berkay22demirel.basiccart.entity.Category;
 
 public interface ICategoryService extends IService {
 
-	void addCategory(Category category);
+	long addCategory(Category category);
 
-	void updateCategory(Category category);
+	long updateCategory(Category category);
 
-	void deleteCategory(long id);
+	long deleteCategory(long id);
 
 	List<Category> getAllCategories();
 

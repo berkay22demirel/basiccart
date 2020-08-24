@@ -6,11 +6,11 @@ import com.berkay22demirel.basiccart.entity.Coupon;
 
 public interface ICouponService extends IService {
 
-	void addCoupon(Coupon coupon);
+	long addCoupon(Coupon coupon);
 
-	void updateCoupon(Coupon coupon);
+	long updateCoupon(Coupon coupon);
 
-	void deleteCoupon(long id);
+	long deleteCoupon(long id);
 
 	List<Coupon> getAllCoupons();
 

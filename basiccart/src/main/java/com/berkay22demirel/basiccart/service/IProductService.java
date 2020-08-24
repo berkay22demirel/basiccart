@@ -6,11 +6,11 @@ import com.berkay22demirel.basiccart.entity.Product;
 
 public interface IProductService extends IService {
 
-	void addProduct(Product product);
+	long addProduct(Product product);
 
-	void updateProduct(Product product);
+	long updateProduct(Product product);
 
-	void deleteProduct(long id);
+	long deleteProduct(long id);
 
 	List<Product> getAllProducts();
 

@@ -16,20 +16,20 @@ public class CouponService implements ICouponService {
 	private ICouponDao couponDao;
 
 	@Override
-	public void addCoupon(Coupon coupon) {
-		couponDao.add(coupon);
+	public long addCoupon(Coupon coupon) {
+		return couponDao.add(coupon);
 
 	}
 
 	@Override
-	public void updateCoupon(Coupon coupon) {
-		couponDao.update(coupon);
+	public long updateCoupon(Coupon coupon) {
+		return couponDao.update(coupon);
 
 	}
 
 	@Override
-	public void deleteCoupon(long id) {
-		couponDao.delete(id);
+	public long deleteCoupon(long id) {
+		return couponDao.delete(id);
 
 	}
 

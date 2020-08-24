@@ -16,20 +16,20 @@ public class CampaignService implements ICampaignService {
 	private ICampaignDao campaignDao;
 
 	@Override
-	public void addCampaign(Campaign campaign) {
-		campaignDao.add(campaign);
+	public long addCampaign(Campaign campaign) {
+		return campaignDao.add(campaign);
 
 	}
 
 	@Override
-	public void updateCampaign(Campaign campaign) {
-		campaignDao.update(campaign);
+	public long updateCampaign(Campaign campaign) {
+		return campaignDao.update(campaign);
 
 	}
 
 	@Override
-	public void deleteCampaign(long id) {
-		campaignDao.delete(id);
+	public long deleteCampaign(long id) {
+		return campaignDao.delete(id);
 
 	}
 

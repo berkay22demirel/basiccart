@@ -16,20 +16,20 @@ public class ShoppingCartItemService implements IShoppingCartItemService {
 	IShoppingCartItemDao shoppingCartItemDao;
 
 	@Override
-	public void addShoppingCartItem(ShoppingCartItem shoppingCartItem) {
-		shoppingCartItemDao.add(shoppingCartItem);
+	public long addShoppingCartItem(ShoppingCartItem shoppingCartItem) {
+		return shoppingCartItemDao.add(shoppingCartItem);
 
 	}
 
 	@Override
-	public void updateShoppingCartItem(ShoppingCartItem shoppingCartItem) {
-		shoppingCartItemDao.update(shoppingCartItem);
+	public long updateShoppingCartItem(ShoppingCartItem shoppingCartItem) {
+		return shoppingCartItemDao.update(shoppingCartItem);
 
 	}
 
 	@Override
-	public void deleteShoppingCartItem(long id) {
-		shoppingCartItemDao.delete(id);
+	public long deleteShoppingCartItem(long id) {
+		return shoppingCartItemDao.delete(id);
 
 	}
 

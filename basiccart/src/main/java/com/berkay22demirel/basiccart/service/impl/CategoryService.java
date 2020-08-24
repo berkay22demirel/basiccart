@@ -16,20 +16,20 @@ public class CategoryService implements ICategoryService {
 	private ICategoryDao categoryDao;
 
 	@Override
-	public void addCategory(Category category) {
-		categoryDao.add(category);
+	public long addCategory(Category category) {
+		return categoryDao.add(category);
 
 	}
 
 	@Override
-	public void updateCategory(Category category) {
-		categoryDao.update(category);
+	public long updateCategory(Category category) {
+		return categoryDao.update(category);
 
 	}
 
 	@Override
-	public void deleteCategory(long id) {
-		categoryDao.delete(id);
+	public long deleteCategory(long id) {
+		return categoryDao.delete(id);
 
 	}
 

@@ -16,19 +16,19 @@ public class ProductService implements IProductService {
 	private IProductDao productDao;
 
 	@Override
-	public void addProduct(Product product) {
-		productDao.add(product);
+	public long addProduct(Product product) {
+		return productDao.add(product);
 	}
 
 	@Override
-	public void updateProduct(Product product) {
-		productDao.update(product);
+	public long updateProduct(Product product) {
+		return productDao.update(product);
 
 	}
 
 	@Override
-	public void deleteProduct(long id) {
-		productDao.delete(id);
+	public long deleteProduct(long id) {
+		return productDao.delete(id);
 
 	}
 

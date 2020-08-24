@@ -9,11 +9,11 @@ import com.berkay22demirel.basiccart.entity.ShoppingCart;
 
 public interface IShoppingCartService extends IService {
 
-	void addShoppingCart(ShoppingCart shoppingCart);
+	long addShoppingCart(ShoppingCart shoppingCart);
 
-	void updateShoppingCart(ShoppingCart shoppingCart);
+	long updateShoppingCart(ShoppingCart shoppingCart);
 
-	void deleteShoppingCart(long id);
+	long deleteShoppingCart(long id);
 
 	List<ShoppingCart> getAllShoppingCarts();
 
