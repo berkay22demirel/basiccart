@@ -10,7 +10,7 @@ public class DiscountUtil {
 		if (DiscountType.RATE.equals(campaign.getDiscountType())) {
 			return (amount / 100) * campaign.getDiscount();
 		} else if (DiscountType.AMOUNT.equals(campaign.getDiscountType())) {
-			return amount - campaign.getDiscount();
+			return campaign.getDiscount();
 		}
 		return 0;
 	}

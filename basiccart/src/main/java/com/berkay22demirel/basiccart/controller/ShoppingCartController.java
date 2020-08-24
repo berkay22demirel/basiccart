@@ -33,7 +33,7 @@ public class ShoppingCartController {
 	@RequestMapping(value = "/add/{quantity}", method = RequestMethod.POST)
 	public ResponseEntity<Object> addItem(@RequestBody Product product, @PathVariable("quantity") int quantity) {
 		shoppingCartService.addItem(shoppingCart, product, quantity);
-		return new ResponseEntity<>("Item is added successfully", HttpStatus.CREATED);
+		return new ResponseEntity<>("Item is added successfully", HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/applyDiscount", method = RequestMethod.POST)

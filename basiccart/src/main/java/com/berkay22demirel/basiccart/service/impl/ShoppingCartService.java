@@ -71,7 +71,7 @@ public class ShoppingCartService implements IShoppingCartService {
 
 	@Override
 	public boolean applyCoupon(ShoppingCart shoppingCart, Coupon coupon) {
-		if (shoppingCart.getTotalAmount() > coupon.getMinimumAmount()) {
+		if (shoppingCart.getTotalAmount() >= coupon.getMinimumAmount()) {
 			double discountAmount = applyCouponForShoppingCartItems(coupon, shoppingCart.getShoppingCartItems(),
 					shoppingCart.getTotalAmount());
 			shoppingCart.setCouponDiscountAmount(discountAmount);
@@ -104,7 +104,7 @@ public class ShoppingCartService implements IShoppingCartService {
 	private double applyDiscountForShoppingCartItems(Campaign campaign, List<ShoppingCartItem> shoppingCartItems) {
 		double totalDiscountAmount = 0;
 		int numberOfProducts = findNumberOfProducts(shoppingCartItems);
-		if (numberOfProducts > campaign.getMinimumItemCount()) {
+		if (numberOfProducts >= campaign.getMinimumItemCount()) {
 			for (ShoppingCartItem shoppingCartItem : shoppingCartItems) {
 				double discountAmount = DiscountUtil.findDiscountAmount(shoppingCartItem.getProduct().getPrice(),
 						campaign);
@@ -121,7 +121,7 @@ public class ShoppingCartService implements IShoppingCartService {
 		for (ShoppingCartItem shoppingCartItem : shoppingCartItems) {
 			double discountAmount = DiscountUtil.findDiscountAmount(totalAmount,
 					shoppingCartItem.getProduct().getPrice(), coupon);
-			shoppingCartItem.setCampaignDiscountAmountPerProduct(discountAmount);
+			shoppingCartItem.setCouponDiscountAmountPerProduct(discountAmount);
 			totalDiscountAmount += (discountAmount * shoppingCartItem.getQuantity());
 		}
 		return totalDiscountAmount;
