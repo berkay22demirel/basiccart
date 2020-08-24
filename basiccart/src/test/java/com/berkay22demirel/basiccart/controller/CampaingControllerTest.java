@@ -13,6 +13,7 @@ import com.berkay22demirel.basiccart.AbstractTest;
 import com.berkay22demirel.basiccart.constant.DiscountType;
 import com.berkay22demirel.basiccart.entity.Campaign;
 import com.berkay22demirel.basiccart.entity.Category;
+import com.berkay22demirel.basiccart.util.JsonUtil;
 
 public class CampaingControllerTest extends AbstractTest {
 
@@ -27,7 +28,7 @@ public class CampaingControllerTest extends AbstractTest {
 		String uri = "/campaign/add";
 		Category category = new Category("meyve");
 		Campaign campaign = new Campaign(category, 5.0, 5, DiscountType.AMOUNT);
-		String inputJson = super.mapToJson(campaign);
+		String inputJson = JsonUtil.mapToJson(campaign);
 		MvcResult mvcResult = mvc.perform(
 				MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
@@ -44,7 +45,7 @@ public class CampaingControllerTest extends AbstractTest {
 		Category category = new Category("meyve");
 		Campaign campaign = new Campaign(category, 15.0, 3, DiscountType.RATE);
 		campaign.setId(1);
-		String inputJson = super.mapToJson(campaign);
+		String inputJson = JsonUtil.mapToJson(campaign);
 		MvcResult mvcResult = mvc.perform(
 				MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
@@ -74,7 +75,7 @@ public class CampaingControllerTest extends AbstractTest {
 		int status = mvcResult.getResponse().getStatus();
 		assertEquals(200, status);
 		String content = mvcResult.getResponse().getContentAsString();
-		Campaign[] campaigns = super.mapFromJson(content, Campaign[].class);
+		Campaign[] campaigns = JsonUtil.mapFromJson(content, Campaign[].class);
 		assertTrue(campaigns.length > 0);
 	}
 

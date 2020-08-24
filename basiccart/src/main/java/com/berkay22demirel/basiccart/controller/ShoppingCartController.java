@@ -18,6 +18,7 @@ import com.berkay22demirel.basiccart.entity.ShoppingCart;
 import com.berkay22demirel.basiccart.service.IDeliveryCostCalculator;
 import com.berkay22demirel.basiccart.service.IShoppingCartService;
 import com.berkay22demirel.basiccart.util.ConsoleUtil;
+import com.berkay22demirel.basiccart.util.JsonUtil;
 
 @RestController
 @RequestMapping(value = "/shoppingcart")
@@ -31,27 +32,28 @@ public class ShoppingCartController {
 	private ShoppingCart shoppingCart = new ShoppingCart();
 
 	@RequestMapping(value = "/add/{quantity}", method = RequestMethod.POST)
-	public ResponseEntity<Object> addItem(@RequestBody Product product, @PathVariable("quantity") int quantity) {
-		shoppingCartService.addItem(shoppingCart, product, quantity);
-		return new ResponseEntity<>("Item is added successfully", HttpStatus.OK);
+	public ResponseEntity<Object> addItem(@RequestBody Product product, @PathVariable("quantity") int quantity)
+			throws Exception {
+		ShoppingCart returnedShoppingCart = shoppingCartService.addItem(shoppingCart, product, quantity);
+		return new ResponseEntity<>(JsonUtil.mapToJson(returnedShoppingCart), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/applyDiscount", method = RequestMethod.POST)
-	public ResponseEntity<Object> applyDiscount(@RequestBody List<Campaign> campaigns) {
-		shoppingCartService.applyDiscount(shoppingCart, campaigns);
-		return new ResponseEntity<>("Discount is applied successfully", HttpStatus.OK);
+	public ResponseEntity<Object> applyDiscount(@RequestBody List<Campaign> campaigns) throws Exception {
+		ShoppingCart returnedShoppingCart = shoppingCartService.applyDiscount(shoppingCart, campaigns);
+		return new ResponseEntity<>(JsonUtil.mapToJson(returnedShoppingCart), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/applyCoupon", method = RequestMethod.POST)
-	public ResponseEntity<Object> applyCoupon(@RequestBody Coupon coupon) {
-		shoppingCartService.applyCoupon(shoppingCart, coupon);
-		return new ResponseEntity<>("Coupon is applied successfully", HttpStatus.OK);
+	public ResponseEntity<Object> applyCoupon(@RequestBody Coupon coupon) throws Exception {
+		ShoppingCart returnedShoppingCart = shoppingCartService.applyCoupon(shoppingCart, coupon);
+		return new ResponseEntity<>(JsonUtil.mapToJson(returnedShoppingCart), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/calculateDeliveryCost")
-	public ResponseEntity<Object> calculateDeliveryCost() {
-		deliveryCostCalculator.calculateFor(shoppingCart);
-		return new ResponseEntity<>("Delivery Cost is calculated successfully", HttpStatus.OK);
+	public ResponseEntity<Object> calculateDeliveryCost() throws Exception {
+		ShoppingCart returnedShoppingCart = deliveryCostCalculator.calculateFor(shoppingCart);
+		return new ResponseEntity<>(JsonUtil.mapToJson(returnedShoppingCart), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/print")

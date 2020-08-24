@@ -24,19 +24,21 @@ public class DeliveryCostCalculator implements IDeliveryCostCalculator {
 
 	public DeliveryCostCalculator() {
 		super();
+		this.costPerDelivery = 1.0;
+		this.costPerProduct = 1.0;
+		this.fixedCost = 2.9;
 	}
 
 	@Override
-	public double calculateFor(ShoppingCart shoppingCart) {
+	public ShoppingCart calculateFor(ShoppingCart shoppingCart) {
 		int numberOfDeliveries = calculateNumberOfDeliveries(shoppingCart);
 		int numberOfProducts = calculateNumberOfProducts(shoppingCart);
 		double deliveryCost = (costPerDelivery * numberOfDeliveries) + (costPerProduct * numberOfProducts) + fixedCost;
 		shoppingCart.setDeliveryCost(deliveryCost);
-		return deliveryCost;
+		return shoppingCart;
 	}
 
-	@Override
-	public int calculateNumberOfDeliveries(ShoppingCart shoppingCart) {
+	private int calculateNumberOfDeliveries(ShoppingCart shoppingCart) {
 		List<ShoppingCartItem> shoppingCartItems = shoppingCart.getShoppingCartItems();
 		int numberOfDeliveries = shoppingCartItems.size();
 		int iterator = 1;
@@ -54,8 +56,7 @@ public class DeliveryCostCalculator implements IDeliveryCostCalculator {
 
 	}
 
-	@Override
-	public int calculateNumberOfProducts(ShoppingCart shoppingCart) {
+	private int calculateNumberOfProducts(ShoppingCart shoppingCart) {
 		return shoppingCart.getShoppingCartItems().size();
 	}
 

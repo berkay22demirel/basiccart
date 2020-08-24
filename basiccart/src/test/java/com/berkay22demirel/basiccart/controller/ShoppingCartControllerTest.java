@@ -16,6 +16,7 @@ import com.berkay22demirel.basiccart.entity.Campaign;
 import com.berkay22demirel.basiccart.entity.Category;
 import com.berkay22demirel.basiccart.entity.Coupon;
 import com.berkay22demirel.basiccart.entity.Product;
+import com.berkay22demirel.basiccart.util.JsonUtil;
 
 public class ShoppingCartControllerTest extends AbstractTest {
 
@@ -30,7 +31,7 @@ public class ShoppingCartControllerTest extends AbstractTest {
 		String uri = "/shoppingcart/add/3";
 		Category category = new Category(1, "meyve");
 		Product product = new Product("elma", 5.0, category);
-		String inputJson = super.mapToJson(product);
+		String inputJson = JsonUtil.mapToJson(product);
 		MvcResult mvcResult = mvc.perform(
 				MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
@@ -49,7 +50,7 @@ public class ShoppingCartControllerTest extends AbstractTest {
 		Category category2 = new Category("sebze");
 		Campaign campaign2 = new Campaign(2, category2, 10.0, 3, DiscountType.RATE);
 
-		String inputJson = super.mapToJson(Arrays.asList(campaign1, campaign2));
+		String inputJson = JsonUtil.mapToJson(Arrays.asList(campaign1, campaign2));
 		MvcResult mvcResult = mvc.perform(
 				MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
@@ -64,7 +65,7 @@ public class ShoppingCartControllerTest extends AbstractTest {
 	public void applyCoupon() throws Exception {
 		String uri = "/shoppingcart/applyCoupon";
 		Coupon coupon = new Coupon(1, 100, 15.0, DiscountType.AMOUNT);
-		String inputJson = super.mapToJson(coupon);
+		String inputJson = JsonUtil.mapToJson(coupon);
 		MvcResult mvcResult = mvc.perform(
 				MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();

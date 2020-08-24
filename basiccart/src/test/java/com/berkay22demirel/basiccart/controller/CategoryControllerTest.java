@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.berkay22demirel.basiccart.AbstractTest;
 import com.berkay22demirel.basiccart.entity.Category;
+import com.berkay22demirel.basiccart.util.JsonUtil;
 
 public class CategoryControllerTest extends AbstractTest {
 
@@ -24,7 +25,7 @@ public class CategoryControllerTest extends AbstractTest {
 	public void addCategory() throws Exception {
 		String uri = "/category/add";
 		Category category = new Category("meyve");
-		String inputJson = super.mapToJson(category);
+		String inputJson = JsonUtil.mapToJson(category);
 		MvcResult mvcResult = mvc.perform(
 				MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
@@ -39,7 +40,7 @@ public class CategoryControllerTest extends AbstractTest {
 	public void updateCategory() throws Exception {
 		String uri = "/category/update";
 		Category category = new Category(1, "sebze");
-		String inputJson = super.mapToJson(category);
+		String inputJson = JsonUtil.mapToJson(category);
 		MvcResult mvcResult = mvc.perform(
 				MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
@@ -69,7 +70,7 @@ public class CategoryControllerTest extends AbstractTest {
 		int status = mvcResult.getResponse().getStatus();
 		assertEquals(200, status);
 		String content = mvcResult.getResponse().getContentAsString();
-		Category[] categories = super.mapFromJson(content, Category[].class);
+		Category[] categories = JsonUtil.mapFromJson(content, Category[].class);
 		assertTrue(categories.length > 0);
 	}
 

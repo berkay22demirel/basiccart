@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.berkay22demirel.basiccart.AbstractTest;
 import com.berkay22demirel.basiccart.constant.DiscountType;
 import com.berkay22demirel.basiccart.entity.Coupon;
+import com.berkay22demirel.basiccart.util.JsonUtil;
 
 public class CouponControllerTest extends AbstractTest {
 
@@ -25,7 +26,7 @@ public class CouponControllerTest extends AbstractTest {
 	public void addCoupon() throws Exception {
 		String uri = "/coupon/add";
 		Coupon coupon = new Coupon(100, 25, DiscountType.RATE);
-		String inputJson = super.mapToJson(coupon);
+		String inputJson = JsonUtil.mapToJson(coupon);
 		MvcResult mvcResult = mvc.perform(
 				MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
@@ -40,7 +41,7 @@ public class CouponControllerTest extends AbstractTest {
 	public void updateCoupon() throws Exception {
 		String uri = "/coupon/update";
 		Coupon coupon = new Coupon(1, 100, 15, DiscountType.RATE);
-		String inputJson = super.mapToJson(coupon);
+		String inputJson = JsonUtil.mapToJson(coupon);
 		MvcResult mvcResult = mvc.perform(
 				MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
@@ -70,7 +71,7 @@ public class CouponControllerTest extends AbstractTest {
 		int status = mvcResult.getResponse().getStatus();
 		assertEquals(200, status);
 		String content = mvcResult.getResponse().getContentAsString();
-		Coupon[] coupons = super.mapFromJson(content, Coupon[].class);
+		Coupon[] coupons = JsonUtil.mapFromJson(content, Coupon[].class);
 		assertTrue(coupons.length > 0);
 	}
 

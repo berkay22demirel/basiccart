@@ -19,8 +19,8 @@ public interface IShoppingCartService extends IService {
 
 	ShoppingCart addItem(ShoppingCart shoppingCart, Product product, int quantity);
 
-	void applyDiscount(ShoppingCart shoppingCart, List<Campaign> campaigns);
+	ShoppingCart applyDiscount(ShoppingCart shoppingCart, List<Campaign> campaigns);
 
-	boolean applyCoupon(ShoppingCart shoppingCart, Coupon coupon);
+	ShoppingCart applyCoupon(ShoppingCart shoppingCart, Coupon coupon);
 
 }

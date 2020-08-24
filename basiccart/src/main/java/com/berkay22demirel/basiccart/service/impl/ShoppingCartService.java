@@ -62,7 +62,7 @@ public class ShoppingCartService implements IShoppingCartService {
 	}
 
 	@Override
-	public void applyDiscount(ShoppingCart shoppingCart, List<Campaign> campaigns) {
+	public ShoppingCart applyDiscount(ShoppingCart shoppingCart, List<Campaign> campaigns) {
 		double totalDiscountAmount = 0;
 		for (Campaign campaign : campaigns) {
 			List<ShoppingCartItem> campaignApplicableShoppingCartItems = findCampaignApplicableShoppingCartItems(
@@ -71,18 +71,18 @@ public class ShoppingCartService implements IShoppingCartService {
 		}
 		shoppingCart.setCampaignDiscountAmount(totalDiscountAmount);
 		shoppingCart.setCampaigns(campaigns);
+		return shoppingCart;
 	}
 
 	@Override
-	public boolean applyCoupon(ShoppingCart shoppingCart, Coupon coupon) {
+	public ShoppingCart applyCoupon(ShoppingCart shoppingCart, Coupon coupon) {
 		if (shoppingCart.getTotalAmount() >= coupon.getMinimumAmount()) {
 			double discountAmount = applyCouponForShoppingCartItems(coupon, shoppingCart.getShoppingCartItems(),
 					shoppingCart.getTotalAmount());
 			shoppingCart.setCouponDiscountAmount(discountAmount);
 			shoppingCart.setCoupon(coupon);
-			return true;
 		}
-		return false;
+		return shoppingCart;
 	}
 
 	private void reapplyDiscount(ShoppingCart shoppingCart) {
@@ -92,16 +92,15 @@ public class ShoppingCartService implements IShoppingCartService {
 
 	}
 
-	private boolean reapplyCoupon(ShoppingCart shoppingCart) {
+	private void reapplyCoupon(ShoppingCart shoppingCart) {
 		if (shoppingCart.getCoupon() != null) {
-			return applyCoupon(shoppingCart, shoppingCart.getCoupon());
+			applyCoupon(shoppingCart, shoppingCart.getCoupon());
 		}
-		return false;
 	}
 
 	private ShoppingCartItem findMatchingItem(List<ShoppingCartItem> shoppingCartItems, Product product) {
 		for (ShoppingCartItem shoppingCartItem : shoppingCartItems) {
-			if (shoppingCartItem.getProduct().equals(product)) {
+			if (shoppingCartItem.getProduct().getId() == product.getId()) {
 				return shoppingCartItem;
 			}
 		}
@@ -112,7 +111,7 @@ public class ShoppingCartService implements IShoppingCartService {
 			List<ShoppingCartItem> shoppingCartItems) {
 		List<ShoppingCartItem> campaignApplicableShoppingCartItems = new ArrayList<>();
 		for (ShoppingCartItem shoppingCartItem : shoppingCartItems) {
-			if (campaign.getCategory().equals(shoppingCartItem.getProduct().getCategory())) {
+			if (campaign.getCategory().getId() == shoppingCartItem.getProduct().getCategory().getId()) {
 				campaignApplicableShoppingCartItems.add(shoppingCartItem);
 			}
 		}

@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.berkay22demirel.basiccart.AbstractTest;
 import com.berkay22demirel.basiccart.entity.Category;
 import com.berkay22demirel.basiccart.entity.Product;
+import com.berkay22demirel.basiccart.util.JsonUtil;
 
 public class ProductControllerTest extends AbstractTest {
 
@@ -26,7 +27,7 @@ public class ProductControllerTest extends AbstractTest {
 		String uri = "/product/add";
 		Category category = new Category("meyve");
 		Product product = new Product("elma", 5.0, category);
-		String inputJson = super.mapToJson(product);
+		String inputJson = JsonUtil.mapToJson(product);
 		MvcResult mvcResult = mvc.perform(
 				MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
@@ -42,7 +43,7 @@ public class ProductControllerTest extends AbstractTest {
 		String uri = "/product/update";
 		Category category = new Category("meyve");
 		Product product = new Product(1, "elma", 7.0, category);
-		String inputJson = super.mapToJson(product);
+		String inputJson = JsonUtil.mapToJson(product);
 		MvcResult mvcResult = mvc.perform(
 				MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
@@ -72,7 +73,7 @@ public class ProductControllerTest extends AbstractTest {
 		int status = mvcResult.getResponse().getStatus();
 		assertEquals(200, status);
 		String content = mvcResult.getResponse().getContentAsString();
-		Product[] products = super.mapFromJson(content, Product[].class);
+		Product[] products = JsonUtil.mapFromJson(content, Product[].class);
 		assertTrue(products.length > 0);
 	}
 

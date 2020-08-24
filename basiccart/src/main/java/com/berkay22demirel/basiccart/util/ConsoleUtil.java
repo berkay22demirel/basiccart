@@ -32,12 +32,16 @@ public class ConsoleUtil {
 			addSpaceStringToConsole(partWidth - String.valueOf(totalAmount).length());
 
 			double totalDiscount = shoppingCartItem.getCampaignDiscountAmountPerProduct()
-					+ shoppingCartItem.getCouponDiscountAmountPerProduct();
+					* shoppingCartItem.getQuantity()
+					+ shoppingCartItem.getCouponDiscountAmountPerProduct() * shoppingCartItem.getQuantity();
 			System.out.print(totalDiscount);
 			addSpaceStringToConsole(partWidth - String.valueOf(totalDiscount).length());
 
 			System.out.print("\n");
 		}
+
+		System.out.println("Toplam Tutar : " + shoppingCart.getTotalAmount());
+		System.out.println("Teslimat Maaliyeti : " + shoppingCart.getDeliveryCost());
 	}
 
 	private static void addSpaceStringToConsole(int size) {
