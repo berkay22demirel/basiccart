@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -31,7 +32,7 @@ public class CategoryControllerTest extends AbstractTest {
 				.andReturn();
 
 		int status = mvcResult.getResponse().getStatus();
-		assertEquals(201, status);
+		assertEquals(HttpStatus.CREATED, HttpStatus.valueOf(status));
 		String content = mvcResult.getResponse().getContentAsString();
 		assertEquals(content, "Category is created successfully");
 	}
@@ -46,7 +47,7 @@ public class CategoryControllerTest extends AbstractTest {
 				.andReturn();
 
 		int status = mvcResult.getResponse().getStatus();
-		assertEquals(200, status);
+		assertEquals(HttpStatus.OK, HttpStatus.valueOf(status));
 		String content = mvcResult.getResponse().getContentAsString();
 		assertEquals(content, "Category is updated successsfully");
 	}
@@ -56,7 +57,7 @@ public class CategoryControllerTest extends AbstractTest {
 		String uri = "/category/delete/1";
 		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
 		int status = mvcResult.getResponse().getStatus();
-		assertEquals(200, status);
+		assertEquals(HttpStatus.OK, HttpStatus.valueOf(status));
 		String content = mvcResult.getResponse().getContentAsString();
 		assertEquals(content, "Category is deleted successsfully");
 	}
@@ -68,7 +69,7 @@ public class CategoryControllerTest extends AbstractTest {
 				.andReturn();
 
 		int status = mvcResult.getResponse().getStatus();
-		assertEquals(200, status);
+		assertEquals(HttpStatus.OK, HttpStatus.valueOf(status));
 		String content = mvcResult.getResponse().getContentAsString();
 		Category[] categories = JsonUtil.mapFromJson(content, Category[].class);
 		assertTrue(categories.length > 0);

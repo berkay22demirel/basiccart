@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -32,7 +33,7 @@ public class CouponControllerTest extends AbstractTest {
 				.andReturn();
 
 		int status = mvcResult.getResponse().getStatus();
-		assertEquals(201, status);
+		assertEquals(HttpStatus.CREATED, HttpStatus.valueOf(status));
 		String content = mvcResult.getResponse().getContentAsString();
 		assertEquals(content, "Coupon is created successfully");
 	}
@@ -47,7 +48,7 @@ public class CouponControllerTest extends AbstractTest {
 				.andReturn();
 
 		int status = mvcResult.getResponse().getStatus();
-		assertEquals(200, status);
+		assertEquals(HttpStatus.OK, HttpStatus.valueOf(status));
 		String content = mvcResult.getResponse().getContentAsString();
 		assertEquals(content, "Coupon is updated successsfully");
 	}
@@ -57,7 +58,7 @@ public class CouponControllerTest extends AbstractTest {
 		String uri = "/coupon/delete/1";
 		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
 		int status = mvcResult.getResponse().getStatus();
-		assertEquals(200, status);
+		assertEquals(HttpStatus.OK, HttpStatus.valueOf(status));
 		String content = mvcResult.getResponse().getContentAsString();
 		assertEquals(content, "Coupon is deleted successsfully");
 	}
@@ -69,7 +70,7 @@ public class CouponControllerTest extends AbstractTest {
 				.andReturn();
 
 		int status = mvcResult.getResponse().getStatus();
-		assertEquals(200, status);
+		assertEquals(HttpStatus.OK, HttpStatus.valueOf(status));
 		String content = mvcResult.getResponse().getContentAsString();
 		Coupon[] coupons = JsonUtil.mapFromJson(content, Coupon[].class);
 		assertTrue(coupons.length > 0);

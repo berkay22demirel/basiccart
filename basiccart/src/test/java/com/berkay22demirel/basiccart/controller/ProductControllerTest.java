@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -33,7 +34,7 @@ public class ProductControllerTest extends AbstractTest {
 				.andReturn();
 
 		int status = mvcResult.getResponse().getStatus();
-		assertEquals(201, status);
+		assertEquals(HttpStatus.CREATED, HttpStatus.valueOf(status));
 		String content = mvcResult.getResponse().getContentAsString();
 		assertEquals(content, "Product is created successfully");
 	}
@@ -49,7 +50,7 @@ public class ProductControllerTest extends AbstractTest {
 				.andReturn();
 
 		int status = mvcResult.getResponse().getStatus();
-		assertEquals(200, status);
+		assertEquals(HttpStatus.OK, HttpStatus.valueOf(status));
 		String content = mvcResult.getResponse().getContentAsString();
 		assertEquals(content, "Product is updated successsfully");
 	}
@@ -59,7 +60,7 @@ public class ProductControllerTest extends AbstractTest {
 		String uri = "/product/delete/1";
 		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
 		int status = mvcResult.getResponse().getStatus();
-		assertEquals(200, status);
+		assertEquals(HttpStatus.OK, HttpStatus.valueOf(status));
 		String content = mvcResult.getResponse().getContentAsString();
 		assertEquals(content, "Product is deleted successsfully");
 	}
@@ -71,7 +72,7 @@ public class ProductControllerTest extends AbstractTest {
 				.andReturn();
 
 		int status = mvcResult.getResponse().getStatus();
-		assertEquals(200, status);
+		assertEquals(HttpStatus.OK, HttpStatus.valueOf(status));
 		String content = mvcResult.getResponse().getContentAsString();
 		Product[] products = JsonUtil.mapFromJson(content, Product[].class);
 		assertTrue(products.length > 0);

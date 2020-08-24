@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -34,7 +35,7 @@ public class CampaingControllerTest extends AbstractTest {
 				.andReturn();
 
 		int status = mvcResult.getResponse().getStatus();
-		assertEquals(201, status);
+		assertEquals(HttpStatus.CREATED, HttpStatus.valueOf(status));
 		String content = mvcResult.getResponse().getContentAsString();
 		assertEquals(content, "Campaign is created successfully");
 	}
@@ -51,7 +52,7 @@ public class CampaingControllerTest extends AbstractTest {
 				.andReturn();
 
 		int status = mvcResult.getResponse().getStatus();
-		assertEquals(200, status);
+		assertEquals(HttpStatus.OK, HttpStatus.valueOf(status));
 		String content = mvcResult.getResponse().getContentAsString();
 		assertEquals(content, "Campaign is updated successsfully");
 	}
@@ -61,7 +62,7 @@ public class CampaingControllerTest extends AbstractTest {
 		String uri = "/campaign/delete/1";
 		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
 		int status = mvcResult.getResponse().getStatus();
-		assertEquals(200, status);
+		assertEquals(HttpStatus.OK, HttpStatus.valueOf(status));
 		String content = mvcResult.getResponse().getContentAsString();
 		assertEquals(content, "Campaign is deleted successsfully");
 	}
@@ -73,7 +74,7 @@ public class CampaingControllerTest extends AbstractTest {
 				.andReturn();
 
 		int status = mvcResult.getResponse().getStatus();
-		assertEquals(200, status);
+		assertEquals(HttpStatus.OK, HttpStatus.valueOf(status));
 		String content = mvcResult.getResponse().getContentAsString();
 		Campaign[] campaigns = JsonUtil.mapFromJson(content, Campaign[].class);
 		assertTrue(campaigns.length > 0);
