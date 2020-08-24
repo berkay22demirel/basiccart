@@ -17,7 +17,7 @@ public interface IShoppingCartService extends IService {
 
 	List<ShoppingCart> getAllShoppingCarts();
 
-	void addItem(ShoppingCart shoppingCart, Product product, int quantity);
+	ShoppingCart addItem(ShoppingCart shoppingCart, Product product, int quantity);
 
 	void applyDiscount(ShoppingCart shoppingCart, List<Campaign> campaigns);
 

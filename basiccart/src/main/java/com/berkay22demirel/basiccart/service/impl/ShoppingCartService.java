@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.berkay22demirel.basiccart.dao.IShoppingCartDao;
 import com.berkay22demirel.basiccart.entity.Campaign;
@@ -45,7 +46,7 @@ public class ShoppingCartService implements IShoppingCartService {
 	}
 
 	@Override
-	public void addItem(ShoppingCart shoppingCart, Product product, int quantity) {
+	public ShoppingCart addItem(ShoppingCart shoppingCart, Product product, int quantity) {
 		ShoppingCartItem matchingItem = findMatchingItem(shoppingCart.getShoppingCartItems(), product);
 		if (matchingItem == null) {
 			ShoppingCartItem shoppingCartItem = new ShoppingCartItem(product, quantity);
@@ -55,6 +56,9 @@ public class ShoppingCartService implements IShoppingCartService {
 		}
 		double addedProductAmount = product.getPrice() * quantity;
 		shoppingCart.setTotalAmount(shoppingCart.getTotalAmount() + addedProductAmount);
+		reapplyDiscount(shoppingCart);
+		reapplyCoupon(shoppingCart);
+		return shoppingCart;
 	}
 
 	@Override
@@ -77,6 +81,20 @@ public class ShoppingCartService implements IShoppingCartService {
 			shoppingCart.setCouponDiscountAmount(discountAmount);
 			shoppingCart.setCoupon(coupon);
 			return true;
+		}
+		return false;
+	}
+
+	private void reapplyDiscount(ShoppingCart shoppingCart) {
+		if (!CollectionUtils.isEmpty(shoppingCart.getCampaigns())) {
+			applyDiscount(shoppingCart, shoppingCart.getCampaigns());
+		}
+
+	}
+
+	private boolean reapplyCoupon(ShoppingCart shoppingCart) {
+		if (shoppingCart.getCoupon() != null) {
+			return applyCoupon(shoppingCart, shoppingCart.getCoupon());
 		}
 		return false;
 	}
