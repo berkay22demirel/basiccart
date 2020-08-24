@@ -15,10 +15,10 @@ public class JsonUtil {
 		return objectMapper.writeValueAsString(obj);
 	}
 
-	public static <T> T mapFromJson(String json, Class<T> clazz)
+	public static <T> T mapFromJson(String json, Class<T> objectClass)
 			throws JsonParseException, JsonMappingException, IOException {
 
 		ObjectMapper objectMapper = new ObjectMapper();
-		return objectMapper.readValue(json, clazz);
+		return objectMapper.readValue(json, objectClass);
 	}
 }

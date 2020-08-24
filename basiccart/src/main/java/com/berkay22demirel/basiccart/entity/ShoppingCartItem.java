@@ -18,4 +18,8 @@ public class ShoppingCartItem extends BaseEntity {
 		this.quantity = quantity;
 	}
 
+	public ShoppingCartItem() {
+		super();
+	}
+
 }

@@ -25,7 +25,7 @@ public class Database {
 		Category category2 = new Category(2, "meyve");
 		Campaign campaignRate = new Campaign(1, category1, 15.0, 3, DiscountType.RATE);
 		Campaign campaignAmount = new Campaign(2, category2, 1.0, 5, DiscountType.AMOUNT);
-		Coupon coupon1 = new Coupon(1, 5.0, 5, DiscountType.AMOUNT);
+		Coupon coupon1 = new Coupon(1, 50.0, 5.0, DiscountType.AMOUNT);
 		Product product1 = new Product(1, "elma", 5.0, category2);
 		category.put(1l, category1);
 		category.put(2l, category2);
