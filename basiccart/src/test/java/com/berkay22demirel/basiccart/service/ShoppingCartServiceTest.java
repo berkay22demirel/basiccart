@@ -229,6 +229,9 @@ public class ShoppingCartServiceTest extends AbstractTest {
 			throws Exception {
 		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
+
+		// FIXME
+
 		shoppingCartService.addItem(shoppingCart, product1, 20);
 		shoppingCartService.applyCoupon(shoppingCart, couponAmount);
 		assertNotNull(shoppingCart.getCoupon());

@@ -8,11 +8,11 @@ import com.berkay22demirel.basiccart.dao.Database;
 import com.berkay22demirel.basiccart.dao.IDao;
 import com.berkay22demirel.basiccart.entity.BaseEntity;
 
-public abstract class DaoSupoort<T> implements IDao<T> {
+public abstract class DaoSupport<T> implements IDao<T> {
 
 	private final Class<T> type;
 
-	public DaoSupoort(Class<T> type) {
+	public DaoSupport(Class<T> type) {
 		this.type = type;
 	}
 
@@ -26,16 +26,24 @@ public abstract class DaoSupoort<T> implements IDao<T> {
 	}
 
 	@Override
-	public void update(T object) {
+	public long update(T object) {
 		Map<Long, Object> table = Database.getTable(type);
 		Long id = ((BaseEntity) object).getId();
-		table.replace(id, object);
+		Object addedObjecT = table.replace(id, object);
+		if (addedObjecT != null) {
+			return id;
+		}
+		return 0;
 	}
 
 	@Override
-	public void delete(long id) {
+	public long delete(long id) {
 		Map<Long, Object> table = Database.getTable(type);
-		table.remove(id);
+		Object deletedObjecT = table.remove(id);
+		if (deletedObjecT != null) {
+			return id;
+		}
+		return 0;
 	}
 
 	@SuppressWarnings("unchecked")

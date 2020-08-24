@@ -6,9 +6,9 @@ public interface IDao<T> {
 
 	public long add(T object);
 
-	public void update(T object);
+	public long update(T object);
 
-	public void delete(long id);
+	public long delete(long id);
 
 	public T findById(long id);
 

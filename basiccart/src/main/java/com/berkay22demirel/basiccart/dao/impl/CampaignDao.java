@@ -6,7 +6,7 @@ import com.berkay22demirel.basiccart.dao.ICampaignDao;
 import com.berkay22demirel.basiccart.entity.Campaign;
 
 @Repository
-public class CampaignDao extends DaoSupoort<Campaign> implements ICampaignDao {
+public class CampaignDao extends DaoSupport<Campaign> implements ICampaignDao {
 
 	public CampaignDao() {
 		super(Campaign.class);

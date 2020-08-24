@@ -6,7 +6,7 @@ import com.berkay22demirel.basiccart.dao.ICouponDao;
 import com.berkay22demirel.basiccart.entity.Coupon;
 
 @Repository
-public class CouponDao extends DaoSupoort<Coupon> implements ICouponDao {
+public class CouponDao extends DaoSupport<Coupon> implements ICouponDao {
 
 	public CouponDao() {
 		super(Coupon.class);
