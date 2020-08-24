@@ -21,7 +21,6 @@ import com.berkay22demirel.basiccart.service.impl.ShoppingCartService;
 
 public class ShoppingCartServiceTest extends AbstractTest {
 
-	ShoppingCart shoppingCart;
 	Product product1;
 	Product product2;
 	Product product3;
@@ -56,7 +55,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 
 	@Test
 	public void addItemShouldIncreaseTotalAmount() throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 3);
 		assertEquals(shoppingCart.getTotalAmount(), 15.0, 0);
@@ -64,7 +63,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 
 	@Test
 	public void addItemShouldIncreaseShoppingCartItemsSize() throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 3);
 		assertEquals(shoppingCart.getShoppingCartItems().size(), 1);
@@ -72,7 +71,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 
 	@Test
 	public void addItemShouldIncreaseShoppingCartItemQuantity() throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 3);
 		for (ShoppingCartItem shoppingCartItem : shoppingCart.getShoppingCartItems()) {
@@ -84,7 +83,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 
 	@Test
 	public void applyDiscountShouldAppliedDiscountWhenProductCountBiggerThanMinimumItemCount() throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 2);
 		shoppingCartService.addItem(shoppingCart, product2, 5);
@@ -95,7 +94,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 
 	@Test
 	public void applyDiscountShouldNotAppliedDiscountWhenProductCountSmallerThanMinimumItemCount() throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 1);
 		shoppingCartService.addItem(shoppingCart, product2, 1);
@@ -107,7 +106,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 	@Test
 	public void applyDiscountShouldAppliedDiscountForProductWhenProductCountBiggerThanMinimumItemCount()
 			throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 5);
 		shoppingCartService.applyDiscount(shoppingCart, Arrays.asList(campaignRate));
@@ -117,7 +116,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 	@Test
 	public void applyDiscountShouldNotAppliedDiscountForProductWhenProductCountSmallerThanMinimumItemCount()
 			throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 4);
 		shoppingCartService.applyDiscount(shoppingCart, Arrays.asList(campaignRate));
@@ -126,7 +125,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 
 	@Test
 	public void applyDiscountShouldIncreaseCampaignsSize() throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 2);
 		shoppingCartService.addItem(shoppingCart, product2, 5);
@@ -138,7 +137,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 	@Test
 	public void applyCouponShouldAppliedCouponForDiscountTypeRateWhenTotalAmountBiggerThanMinimumAmount()
 			throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 4);
 		shoppingCartService.applyCoupon(shoppingCart, couponRate);
@@ -148,7 +147,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 	@Test
 	public void applyCouponShouldAppliedCouponForDiscountTypeAmountWhenTotalAmountBiggerThanMinimumAmount()
 			throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 20);
 		shoppingCartService.applyCoupon(shoppingCart, couponAmount);
@@ -158,7 +157,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 	@Test
 	public void applyCouponShouldNotAppliedCouponForDiscountTypeRateWhenTotalAmountSmallerThanMinimumAmount()
 			throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 3);
 		shoppingCartService.applyCoupon(shoppingCart, couponRate);
@@ -168,7 +167,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 	@Test
 	public void applyCouponShouldNotAppliedCouponForDiscountTypeAmountWhenTotalAmountSmallerThanMinimumAmount()
 			throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 19);
 		shoppingCartService.applyCoupon(shoppingCart, couponAmount);
@@ -178,7 +177,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 	@Test
 	public void applyCouponShouldAppliedCouponForProductAndDiscountTypeRateWhenTotalAmountBiggerThanMinimumAmount()
 			throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 4);
 		shoppingCartService.applyCoupon(shoppingCart, couponRate);
@@ -188,7 +187,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 	@Test
 	public void applyCouponShouldAppliedCouponForProductAndDiscountTypeAmountWhenTotalAmountBiggerThanMinimumAmount()
 			throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 20);
 		shoppingCartService.applyCoupon(shoppingCart, couponAmount);
@@ -198,7 +197,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 	@Test
 	public void applyCouponShouldNotAppliedCouponForProductAndDiscountTypeRateWhenTotalAmountSmallerThanMinimumAmount()
 			throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 3);
 		shoppingCartService.applyCoupon(shoppingCart, couponRate);
@@ -208,7 +207,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 	@Test
 	public void applyCouponShouldNotAppliedCouponForProductAndDiscountTypeAmountWhenTotalAmountSmallerThanMinimumAmount()
 			throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 19);
 		shoppingCartService.applyCoupon(shoppingCart, couponAmount);
@@ -218,7 +217,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 	@Test
 	public void applyCouponShouldAddedCouponForDiscountTypeRateWhenTotalAmountBiggerThanMinimumAmount()
 			throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 4);
 		shoppingCartService.applyCoupon(shoppingCart, couponRate);
@@ -228,7 +227,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 	@Test
 	public void applyCouponShouldAddedCouponForDiscountTypeAmountWhenTotalAmountBiggerThanMinimumAmount()
 			throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 20);
 		shoppingCartService.applyCoupon(shoppingCart, couponAmount);
@@ -238,7 +237,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 	@Test
 	public void applyCouponShouldNotAddedCouponForDiscountTypeRateWhenTotalAmountSmallerThanMinimumAmount()
 			throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 3);
 		shoppingCartService.applyCoupon(shoppingCart, couponRate);
@@ -248,7 +247,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 	@Test
 	public void applyCouponShouldNotAddedCouponForDiscountTypeAmountWhenTotalAmountSmallerThanMinimumAmount()
 			throws Exception {
-		shoppingCart = new ShoppingCart();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		IShoppingCartService shoppingCartService = new ShoppingCartService();
 		shoppingCartService.addItem(shoppingCart, product1, 19);
 		shoppingCartService.applyCoupon(shoppingCart, couponAmount);

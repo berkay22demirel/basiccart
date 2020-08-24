@@ -45,8 +45,8 @@ public class DeliveryCostCalculator implements IDeliveryCostCalculator {
 		for (int i = iterator; i < shoppingCartItems.size(); i++) {
 			int numberOfSameCategory = 0;
 			for (int j = i + 1; j < shoppingCartItems.size(); j++) {
-				if (shoppingCartItems.get(i).getProduct().getCategory()
-						.equals(shoppingCartItems.get(j).getProduct().getCategory())) {
+				if (shoppingCartItems.get(i).getProduct().getCategory().getId() == shoppingCartItems.get(j).getProduct()
+						.getId()) {
 					numberOfSameCategory++;
 				}
 			}
