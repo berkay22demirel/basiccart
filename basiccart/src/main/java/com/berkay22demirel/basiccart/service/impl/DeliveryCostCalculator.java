@@ -1,5 +1,6 @@
 package com.berkay22demirel.basiccart.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -40,17 +41,20 @@ public class DeliveryCostCalculator implements IDeliveryCostCalculator {
 
 	private int calculateNumberOfDeliveries(ShoppingCart shoppingCart) {
 		List<ShoppingCartItem> shoppingCartItems = shoppingCart.getShoppingCartItems();
+		List<Long> controledCategories = new ArrayList<>();
 		int numberOfDeliveries = shoppingCartItems.size();
-		int iterator = 1;
-		for (int i = iterator; i < shoppingCartItems.size(); i++) {
+		for (int i = 0; i < shoppingCartItems.size(); i++) {
 			int numberOfSameCategory = 0;
-			for (int j = i + 1; j < shoppingCartItems.size(); j++) {
-				if (shoppingCartItems.get(i).getProduct().getCategory().getId() == shoppingCartItems.get(j).getProduct()
-						.getId()) {
-					numberOfSameCategory++;
+			if (!controledCategories.contains(shoppingCartItems.get(i).getProduct().getCategory().getId())) {
+				for (int j = i + 1; j < shoppingCartItems.size(); j++) {
+					if (shoppingCartItems.get(i).getProduct().getCategory().getId() == shoppingCartItems.get(j)
+							.getProduct().getCategory().getId()) {
+						numberOfSameCategory++;
+					}
 				}
+				controledCategories.add(shoppingCartItems.get(i).getProduct().getCategory().getId());
+				numberOfDeliveries -= numberOfSameCategory;
 			}
-			numberOfDeliveries -= numberOfSameCategory;
 		}
 		return numberOfDeliveries;
 

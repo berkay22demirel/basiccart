@@ -34,8 +34,11 @@ public class ConsoleUtil {
 			double totalDiscount = shoppingCartItem.getCampaignDiscountAmountPerProduct()
 					* shoppingCartItem.getQuantity()
 					+ shoppingCartItem.getCouponDiscountAmountPerProduct() * shoppingCartItem.getQuantity();
-			System.out.print(totalDiscount);
-			addSpaceStringToConsole(partWidth - String.valueOf(totalDiscount).length());
+			String discountString = totalDiscount + " ("
+					+ (shoppingCartItem.getCampaignDiscountAmountPerProduct() * shoppingCartItem.getQuantity()) + " - "
+					+ shoppingCartItem.getCouponDiscountAmountPerProduct() * shoppingCartItem.getQuantity() + ")";
+			System.out.print(discountString);
+			addSpaceStringToConsole(partWidth - String.valueOf(discountString).length());
 
 			System.out.print("\n");
 		}

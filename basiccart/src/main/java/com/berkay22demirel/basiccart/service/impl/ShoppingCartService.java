@@ -9,6 +9,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.berkay22demirel.basiccart.dao.IShoppingCartDao;
 import com.berkay22demirel.basiccart.entity.Campaign;
+import com.berkay22demirel.basiccart.entity.Category;
 import com.berkay22demirel.basiccart.entity.Coupon;
 import com.berkay22demirel.basiccart.entity.Product;
 import com.berkay22demirel.basiccart.entity.ShoppingCart;
@@ -66,6 +67,7 @@ public class ShoppingCartService implements IShoppingCartService {
 	@Override
 	public ShoppingCart applyDiscount(ShoppingCart shoppingCart, List<Campaign> campaigns) {
 		double totalDiscountAmount = 0;
+		clearOldCampaignAmount(shoppingCart.getShoppingCartItems());
 		for (Campaign campaign : campaigns) {
 			List<ShoppingCartItem> campaignApplicableShoppingCartItems = findCampaignApplicableShoppingCartItems(
 					campaign, shoppingCart.getShoppingCartItems());
@@ -110,7 +112,8 @@ public class ShoppingCartService implements IShoppingCartService {
 			List<ShoppingCartItem> shoppingCartItems) {
 		List<ShoppingCartItem> campaignApplicableShoppingCartItems = new ArrayList<>();
 		for (ShoppingCartItem shoppingCartItem : shoppingCartItems) {
-			if (campaign.getCategory().getId() == shoppingCartItem.getProduct().getCategory().getId()) {
+			List<Category> productCategories = getAllCategoriesForProduct(shoppingCartItem.getProduct());
+			if (isIncludedCampaignCategoryForProductCategories(productCategories, campaign.getCategory())) {
 				campaignApplicableShoppingCartItems.add(shoppingCartItem);
 			}
 		}
@@ -124,7 +127,8 @@ public class ShoppingCartService implements IShoppingCartService {
 			for (ShoppingCartItem shoppingCartItem : shoppingCartItems) {
 				double discountAmount = DiscountUtil.findDiscountAmount(shoppingCartItem.getProduct().getPrice(),
 						campaign);
-				shoppingCartItem.setCampaignDiscountAmountPerProduct(discountAmount);
+				shoppingCartItem.setCampaignDiscountAmountPerProduct(
+						shoppingCartItem.getCampaignDiscountAmountPerProduct() + discountAmount);
 				totalDiscountAmount += (discountAmount * shoppingCartItem.getQuantity());
 			}
 		}
@@ -149,6 +153,37 @@ public class ShoppingCartService implements IShoppingCartService {
 			numberOfProducts += shoppingCartItem.getQuantity();
 		}
 		return numberOfProducts;
+	}
+
+	private List<Category> getAllCategoriesForProduct(Product product) {
+		List<Category> productCategories = new ArrayList<>();
+		productCategories.add(product.getCategory());
+		Category topCategory = product.getCategory().getTopCategory();
+		while (true) {
+			if (topCategory == null) {
+				break;
+			}
+			productCategories.add(topCategory);
+			topCategory = topCategory.getTopCategory();
+
+		}
+		return productCategories;
+	}
+
+	private boolean isIncludedCampaignCategoryForProductCategories(List<Category> productCategories,
+			Category campaignCategory) {
+		for (Category category : productCategories) {
+			if (campaignCategory.getId() == category.getId()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void clearOldCampaignAmount(List<ShoppingCartItem> shoppingCartItems) {
+		for (ShoppingCartItem shoppingCartItem : shoppingCartItems) {
+			shoppingCartItem.setCampaignDiscountAmountPerProduct(0.0);
+		}
 	}
 
 }
