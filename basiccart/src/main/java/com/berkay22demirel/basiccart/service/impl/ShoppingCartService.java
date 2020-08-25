@@ -60,7 +60,6 @@ public class ShoppingCartService implements IShoppingCartService {
 		double addedProductAmount = product.getPrice() * quantity;
 		shoppingCart.setTotalAmount(shoppingCart.getTotalAmount() + addedProductAmount);
 		reapplyDiscount(shoppingCart);
-		reapplyCoupon(shoppingCart);
 		return shoppingCart;
 	}
 
@@ -84,6 +83,9 @@ public class ShoppingCartService implements IShoppingCartService {
 					shoppingCart.getTotalAmount());
 			shoppingCart.setCouponDiscountAmount(discountAmount);
 			shoppingCart.setCoupon(coupon);
+		} else if (shoppingCart.getCoupon() != null) {
+			shoppingCart.setCouponDiscountAmount(0.0);
+			shoppingCart.setCoupon(null);
 		}
 		return shoppingCart;
 	}
@@ -93,12 +95,6 @@ public class ShoppingCartService implements IShoppingCartService {
 			applyDiscount(shoppingCart, shoppingCart.getCampaigns());
 		}
 
-	}
-
-	private void reapplyCoupon(ShoppingCart shoppingCart) {
-		if (shoppingCart.getCoupon() != null) {
-			applyCoupon(shoppingCart, shoppingCart.getCoupon());
-		}
 	}
 
 	private ShoppingCartItem findMatchingItem(List<ShoppingCartItem> shoppingCartItems, Product product) {
